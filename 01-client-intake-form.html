@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>01 · Client Intake Form — JARVIS Onboarding Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep-black:#0A0A0A; --midnight:#0F172A; --electric:#3B82F6;
+  --light-blue:#60A5FA; --soft-gray:#E5E7EB; --dark-gray:#1F2937;
+  --muted:#94A3B8; --card:#0F172A; --line:rgba(59,130,246,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--deep-black);
+  background-image:radial-gradient(1200px 500px at 50% -10%, rgba(59,130,246,.10), transparent 60%);
+  color:var(--soft-gray);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:15.5px; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:880px;margin:0 auto;padding:0 28px 96px}
+
+/* ---------- Header ---------- */
+header.doc{
+  padding:56px 0 36px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:44px;
+  position:relative;
+}
+.brandline{display:flex;align-items:center;gap:14px;margin-bottom:34px}
+.xmark{
+  width:42px;height:42px;border-radius:10px;
+  background:linear-gradient(135deg,#1E3A8A 0%,#3B82F6 60%,#60A5FA 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:22px;color:#fff;
+  box-shadow:0 0 22px rgba(59,130,246,.55), inset 0 1px 0 rgba(255,255,255,.25);
+}
+.brandname{font-weight:700;font-size:15px;letter-spacing:.14em;color:#fff}
+.brandname span{color:var(--light-blue)}
+.brandtag{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.docmeta{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.docnum{
+  font-weight:800;font-size:13px;letter-spacing:.2em;color:var(--electric);
+  padding:5px 12px;border:1px solid var(--electric);border-radius:6px;
+  box-shadow:0 0 14px rgba(59,130,246,.35);
+}
+.badge{
+  font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  padding:6px 13px;border-radius:999px;
+}
+.badge.internal{color:#FCA5A5;background:rgba(220,38,38,.12);border:1px solid rgba(248,113,113,.4)}
+.badge.client{color:var(--light-blue);background:rgba(59,130,246,.12);border:1px solid rgba(96,165,250,.45)}
+h1.doctitle{
+  font-size:clamp(30px,5vw,42px);font-weight:800;letter-spacing:-.02em;color:#fff;
+  line-height:1.12;margin-bottom:10px;
+}
+.docsub{font-size:17px;color:var(--muted);font-weight:400;max-width:620px}
+
+/* ---------- Content ---------- */
+h1{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.01em;margin:52px 0 18px}
+main > h1:first-child{display:none} /* title already in header */
+h2{
+  font-size:20px;font-weight:700;color:#fff;margin:46px 0 16px;
+  padding-left:16px;border-left:3px solid var(--electric);
+  text-shadow:0 0 24px rgba(59,130,246,.25);
+}
+h3{font-size:15.5px;font-weight:700;color:var(--light-blue);margin:30px 0 12px;
+  letter-spacing:.02em}
+p{margin:0 0 14px;color:var(--soft-gray)}
+strong{color:#fff;font-weight:600}
+em{color:var(--muted)}
+a{color:var(--light-blue);text-decoration:none;border-bottom:1px solid rgba(96,165,250,.35)}
+hr{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--line) 20%,var(--line) 80%,transparent);margin:44px 0}
+ul,ol{margin:0 0 16px 22px}
+li{margin-bottom:7px}
+li::marker{color:var(--electric)}
+
+blockquote{
+  margin:20px 0;padding:18px 22px;border-left:3px solid var(--electric);
+  background:linear-gradient(90deg,rgba(59,130,246,.10),rgba(59,130,246,.02));
+  border-radius:0 10px 10px 0;color:var(--soft-gray);font-style:italic;
+}
+blockquote p:last-child{margin-bottom:0}
+
+code{
+  font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:.86em;
+  color:var(--light-blue);background:var(--dark-gray);
+  padding:2px 7px;border-radius:5px;border:1px solid rgba(96,165,250,.2);
+}
+pre{
+  background:#0B1120;border:1px solid var(--line);border-radius:12px;
+  padding:20px 22px;overflow-x:auto;margin:18px 0 22px;
+  box-shadow:inset 0 0 40px rgba(59,130,246,.05);
+}
+pre code{background:none;border:none;padding:0;color:var(--soft-gray);font-size:13px;line-height:1.6}
+
+table{
+  width:100%;border-collapse:separate;border-spacing:0;margin:20px 0 26px;
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px;
+}
+th{
+  background:linear-gradient(180deg,#13203E,var(--midnight));color:#fff;
+  font-weight:700;text-align:left;padding:12px 15px;font-size:12.5px;
+  letter-spacing:.06em;text-transform:uppercase;
+  border-bottom:1px solid var(--electric);
+}
+td{padding:12px 15px;border-bottom:1px solid rgba(148,163,184,.10);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:rgba(59,130,246,.035)}
+
+/* checklists */
+ul.tasks{list-style:none;margin-left:0}
+ul.tasks li{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:10px 14px;margin-bottom:8px;border-radius:10px;
+  background:rgba(15,23,42,.65);border:1px solid rgba(148,163,184,.10);
+}
+ul.tasks li:hover{border-color:var(--line)}
+.cb{
+  flex:none;width:18px;height:18px;margin-top:3px;border-radius:5px;
+  border:2px solid var(--electric);box-shadow:0 0 8px rgba(59,130,246,.35);
+}
+
+/* prompt blocks (client playbook) */
+.prompt{
+  font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13.5px;
+  background:#0B1120;border:1px solid rgba(96,165,250,.35);border-radius:10px;
+  padding:14px 18px;margin:12px 0;color:#DBEAFE;
+  box-shadow:0 0 18px rgba(59,130,246,.15), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.prompt::before{content:"› ";color:var(--electric);font-weight:700}
+
+/* callouts */
+.callout{
+  display:flex;gap:14px;padding:18px 20px;border-radius:12px;margin:22px 0;
+  background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(59,130,246,.04));
+  border:1px solid var(--line);
+}
+.callout.warn{
+  background:linear-gradient(135deg,rgba(220,38,38,.12),rgba(220,38,38,.03));
+  border-color:rgba(248,113,113,.35);
+}
+.callout .ic{flex:none;font-size:18px;line-height:1.4}
+
+footer.doc{
+  margin-top:80px;padding-top:26px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  font-size:12px;color:var(--muted);letter-spacing:.06em;
+}
+footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
+
+@media print{
+  body{background:var(--deep-black) !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (max-width:640px){
+  .page{padding:0 18px 64px}
+  header.doc{padding-top:36px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="doc">
+  <div class="brandline">
+    <div class="xmark">X</div>
+    <div>
+      <div class="brandname">JARVIS <span>&times;</span> XCEREBRO AI</div>
+      <div class="brandtag">Your AI Employee. Runs Your Business 24/7.</div>
+    </div>
+  </div>
+  <div class="docmeta">
+    <span class="docnum">DOC 01</span>
+    <span class="badge client">Client-Facing</span>
+  </div>
+  <h1 class="doctitle">Client Intake Form</h1>
+  <p class="docsub">Tell us your business. We build your AI employee around it.</p>
+</header>
+<main>
+<p><strong>Welcome! Before we build your JARVIS Agent, we need to learn your business.</strong></p>
+<p>The more detail you give us here, the smarter your agent will be on day one. Short answers = generic agent. Detailed answers = an agent that actually sounds like your business. Budget 20–30 minutes.</p>
+<p><em>(Team note: host this as a Jarvis CRM form or Google Form. Every field maps to a knowledge-base file. Do not schedule the install call until this is submitted and reviewed.)</em></p>
+<hr />
+<h2>Section 1 — Business Basics</h2>
+<ol>
+<li>Business name:</li>
+<li>Your name and role:</li>
+<li>Best phone and email:</li>
+<li>Time zone:</li>
+<li>Website (if any):</li>
+<li>How long have you been wholesaling?</li>
+<li>How many deals do you close in a typical month?</li>
+<li>Team members and their roles (acquisitions, dispo, VA, admin):</li>
+</ol>
+<h2>Section 2 — Market &amp; Buy Box</h2>
+<ol>
+<li>Primary market (metro/county):</li>
+<li>Target cities:</li>
+<li>Target zip codes:</li>
+<li>Property types you buy (SFR, duplex, land, mobile, etc.):</li>
+<li>Property types you avoid:</li>
+<li>Minimum equity you look for:</li>
+<li>Maximum repair level you'll take on (cosmetic / medium / full gut):</li>
+<li>Minimum spread or assignment fee target:</li>
+<li>Price range you operate in (min/max ARV):</li>
+<li>Deal-killers — what makes you walk away instantly?</li>
+</ol>
+<h2>Section 3 — Leads</h2>
+<ol>
+<li>Where do your seller leads come from? (check all)<ul class="tasks">
+<li class="task"><span class="cb"></span><span>Cold calling</span></li>
+<li class="task"><span class="cb"></span><span>SMS campaigns</span></li>
+<li class="task"><span class="cb"></span><span>Direct mail</span></li>
+<li class="task"><span class="cb"></span><span>PPC / online ads</span></li>
+<li class="task"><span class="cb"></span><span>Driving for dollars</span></li>
+<li class="task"><span class="cb"></span><span>Referrals</span></li>
+<li class="task"><span class="cb"></span><span>Data lists (probate, foreclosure, tax delinquent, code violations, etc.)</span></li>
+<li class="task"><span class="cb"></span><span>Other: ______</span></li>
+</ul>
+</li>
+<li>Which lead types are most valuable to you? (probate, pre-foreclosure, tired landlord, absentee, inherited, vacant, etc.)</li>
+<li>Roughly how many new seller leads per week?</li>
+<li>What happens today when a new lead comes in? Walk us through it step by step.</li>
+<li>What's your biggest bottleneck: lead flow, follow-up, comping, dispo, or admin?</li>
+</ol>
+<h2>Section 4 — Offers &amp; Comping</h2>
+<ol>
+<li>How do you estimate ARV? (comps yourself, agent, software — which?)</li>
+<li>How do you estimate repairs?</li>
+<li>Your MAO formula (e.g., ARV × 70% − repairs − fee):</li>
+<li>Who approves offers before they go out?</li>
+</ol>
+<h2>Section 5 — Disposition</h2>
+<ol>
+<li>How big is your buyer list?</li>
+<li>How do you market deals to buyers? (email, SMS, Facebook, dispo partner)</li>
+<li>Typical assignment fee range:</li>
+<li>Do you double-close, assign, or both?</li>
+</ol>
+<h2>Section 6 — Your Jarvis CRM Setup</h2>
+<ol>
+<li>Do you already use Jarvis CRM? Yes / No</li>
+<li>If yes — list your pipeline stages as they exist today:</li>
+<li>List the tags you currently use:</li>
+<li>What automations are currently running? (new-lead texts, missed-call text back, drip campaigns, appointment reminders, etc.)</li>
+<li>Do you send SMS through the CRM today? Yes / No</li>
+<li>Is your number A2P/10DLC registered for texting? Yes / No / Not sure</li>
+</ol>
+<h2>Section 7 — AI Access</h2>
+<ol>
+<li>Do you currently pay for any AI subscription?<ul class="tasks">
+<li class="task"><span class="cb"></span><span>ChatGPT (which plan?)</span></li>
+<li class="task"><span class="cb"></span><span>Claude (which plan?)</span></li>
+<li class="task"><span class="cb"></span><span>Other: ______</span></li>
+<li class="task"><span class="cb"></span><span>None yet</span></li>
+</ul>
+</li>
+<li>Are you comfortable setting up a usage-based API account (with our help) if that's the best fit? Yes / No</li>
+<li>Rough monthly budget for AI usage: $______</li>
+</ol>
+<h2>Section 8 — What You Want JARVIS To Do</h2>
+<ol>
+<li>Rank what matters most (1 = most important):<ul>
+<li>___ Seller lead intake &amp; qualification</li>
+<li>___ Follow-up writing (SMS/email)</li>
+<li>___ Comping &amp; offer prep support</li>
+<li>___ CRM updates &amp; pipeline cleanup</li>
+<li>___ Buyer outreach / dispo support</li>
+<li>___ Daily task planning</li>
+<li>___ Training my team / VAs</li>
+</ul>
+</li>
+<li>Anything JARVIS should <strong>never</strong> do or say? (your do-not-say list)</li>
+<li>Describe your communication style in 3 words (e.g., "direct, friendly, no-fluff"):</li>
+<li>Paste your best cold call or seller script below (or attach):</li>
+<li>Paste your standard follow-up messages below (or attach):</li>
+</ol>
+<h2>Section 9 — Scheduling</h2>
+<ol>
+<li>Best days/times for a 60–90 minute install call:</li>
+<li>Will anyone else from your team join the call?</li>
+<li>Anything else we should know?</li>
+</ol>
+<hr />
+<p><strong>What happens next:</strong> Our team reviews your intake within 24 hours, then sends you a booking link plus a short access checklist so your install call runs smooth. On the call we install everything, train your agent on YOUR business, connect it to your Jarvis CRM, and test it live with you.</p>
+</main>
+<footer class="doc">
+  <span><span class="glowdot">●</span>&nbsp; JARVIS Agent Install System &nbsp;·&nbsp; Just Jarvis LLC</span>
+  <span>Doc 01 &nbsp;·&nbsp; v1.0 &nbsp;·&nbsp; SHARE WITH CLIENT</span>
+</footer>
+</div>
+</body>
+</html>

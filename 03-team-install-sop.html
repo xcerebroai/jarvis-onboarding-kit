@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>03 · Team Install SOP — JARVIS Onboarding Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep-black:#0A0A0A; --midnight:#0F172A; --electric:#3B82F6;
+  --light-blue:#60A5FA; --soft-gray:#E5E7EB; --dark-gray:#1F2937;
+  --muted:#94A3B8; --card:#0F172A; --line:rgba(59,130,246,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--deep-black);
+  background-image:radial-gradient(1200px 500px at 50% -10%, rgba(59,130,246,.10), transparent 60%);
+  color:var(--soft-gray);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:15.5px; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:880px;margin:0 auto;padding:0 28px 96px}
+
+/* ---------- Header ---------- */
+header.doc{
+  padding:56px 0 36px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:44px;
+  position:relative;
+}
+.brandline{display:flex;align-items:center;gap:14px;margin-bottom:34px}
+.xmark{
+  width:42px;height:42px;border-radius:10px;
+  background:linear-gradient(135deg,#1E3A8A 0%,#3B82F6 60%,#60A5FA 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:22px;color:#fff;
+  box-shadow:0 0 22px rgba(59,130,246,.55), inset 0 1px 0 rgba(255,255,255,.25);
+}
+.brandname{font-weight:700;font-size:15px;letter-spacing:.14em;color:#fff}
+.brandname span{color:var(--light-blue)}
+.brandtag{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.docmeta{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.docnum{
+  font-weight:800;font-size:13px;letter-spacing:.2em;color:var(--electric);
+  padding:5px 12px;border:1px solid var(--electric);border-radius:6px;
+  box-shadow:0 0 14px rgba(59,130,246,.35);
+}
+.badge{
+  font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  padding:6px 13px;border-radius:999px;
+}
+.badge.internal{color:#FCA5A5;background:rgba(220,38,38,.12);border:1px solid rgba(248,113,113,.4)}
+.badge.client{color:var(--light-blue);background:rgba(59,130,246,.12);border:1px solid rgba(96,165,250,.45)}
+h1.doctitle{
+  font-size:clamp(30px,5vw,42px);font-weight:800;letter-spacing:-.02em;color:#fff;
+  line-height:1.12;margin-bottom:10px;
+}
+.docsub{font-size:17px;color:var(--muted);font-weight:400;max-width:620px}
+
+/* ---------- Content ---------- */
+h1{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.01em;margin:52px 0 18px}
+main > h1:first-child{display:none} /* title already in header */
+h2{
+  font-size:20px;font-weight:700;color:#fff;margin:46px 0 16px;
+  padding-left:16px;border-left:3px solid var(--electric);
+  text-shadow:0 0 24px rgba(59,130,246,.25);
+}
+h3{font-size:15.5px;font-weight:700;color:var(--light-blue);margin:30px 0 12px;
+  letter-spacing:.02em}
+p{margin:0 0 14px;color:var(--soft-gray)}
+strong{color:#fff;font-weight:600}
+em{color:var(--muted)}
+a{color:var(--light-blue);text-decoration:none;border-bottom:1px solid rgba(96,165,250,.35)}
+hr{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--line) 20%,var(--line) 80%,transparent);margin:44px 0}
+ul,ol{margin:0 0 16px 22px}
+li{margin-bottom:7px}
+li::marker{color:var(--electric)}
+
+blockquote{
+  margin:20px 0;padding:18px 22px;border-left:3px solid var(--electric);
+  background:linear-gradient(90deg,rgba(59,130,246,.10),rgba(59,130,246,.02));
+  border-radius:0 10px 10px 0;color:var(--soft-gray);font-style:italic;
+}
+blockquote p:last-child{margin-bottom:0}
+
+code{
+  font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:.86em;
+  color:var(--light-blue);background:var(--dark-gray);
+  padding:2px 7px;border-radius:5px;border:1px solid rgba(96,165,250,.2);
+}
+pre{
+  background:#0B1120;border:1px solid var(--line);border-radius:12px;
+  padding:20px 22px;overflow-x:auto;margin:18px 0 22px;
+  box-shadow:inset 0 0 40px rgba(59,130,246,.05);
+}
+pre code{background:none;border:none;padding:0;color:var(--soft-gray);font-size:13px;line-height:1.6}
+
+table{
+  width:100%;border-collapse:separate;border-spacing:0;margin:20px 0 26px;
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px;
+}
+th{
+  background:linear-gradient(180deg,#13203E,var(--midnight));color:#fff;
+  font-weight:700;text-align:left;padding:12px 15px;font-size:12.5px;
+  letter-spacing:.06em;text-transform:uppercase;
+  border-bottom:1px solid var(--electric);
+}
+td{padding:12px 15px;border-bottom:1px solid rgba(148,163,184,.10);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:rgba(59,130,246,.035)}
+
+/* checklists */
+ul.tasks{list-style:none;margin-left:0}
+ul.tasks li{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:10px 14px;margin-bottom:8px;border-radius:10px;
+  background:rgba(15,23,42,.65);border:1px solid rgba(148,163,184,.10);
+}
+ul.tasks li:hover{border-color:var(--line)}
+.cb{
+  flex:none;width:18px;height:18px;margin-top:3px;border-radius:5px;
+  border:2px solid var(--electric);box-shadow:0 0 8px rgba(59,130,246,.35);
+}
+
+/* prompt blocks (client playbook) */
+.prompt{
+  font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13.5px;
+  background:#0B1120;border:1px solid rgba(96,165,250,.35);border-radius:10px;
+  padding:14px 18px;margin:12px 0;color:#DBEAFE;
+  box-shadow:0 0 18px rgba(59,130,246,.15), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.prompt::before{content:"› ";color:var(--electric);font-weight:700}
+
+/* callouts */
+.callout{
+  display:flex;gap:14px;padding:18px 20px;border-radius:12px;margin:22px 0;
+  background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(59,130,246,.04));
+  border:1px solid var(--line);
+}
+.callout.warn{
+  background:linear-gradient(135deg,rgba(220,38,38,.12),rgba(220,38,38,.03));
+  border-color:rgba(248,113,113,.35);
+}
+.callout .ic{flex:none;font-size:18px;line-height:1.4}
+
+footer.doc{
+  margin-top:80px;padding-top:26px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  font-size:12px;color:var(--muted);letter-spacing:.06em;
+}
+footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
+
+@media print{
+  body{background:var(--deep-black) !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (max-width:640px){
+  .page{padding:0 18px 64px}
+  header.doc{padding-top:36px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="doc">
+  <div class="brandline">
+    <div class="xmark">X</div>
+    <div>
+      <div class="brandname">JARVIS <span>&times;</span> XCEREBRO AI</div>
+      <div class="brandtag">Your AI Employee. Runs Your Business 24/7.</div>
+    </div>
+  </div>
+  <div class="docmeta">
+    <span class="docnum">DOC 03</span>
+    <span class="badge internal">Internal Only — Do Not Send</span>
+  </div>
+  <h1 class="doctitle">Team Install SOP</h1>
+  <p class="docsub">Internal installation procedure — never send to clients</p>
+</header>
+<main>
+<p><strong>Never send this document to a client.</strong> Client-facing language: the agent is "JARVIS," the CRM is "Jarvis CRM." Internally we say Hermes and GHL.</p>
+<p><strong>Roles:</strong> Installer runs the call. Marc/Alexia handle intake review, scheduling, and 7-day follow-up. Escalate blockers to Quentin.</p>
+<hr />
+<h2>Phase 0 — Before the Call (Installer prep, ~30 min, day before)</h2>
+<ol>
+<li>Read the client's intake form top to bottom.</li>
+<li>Create the client folder from the template:
+   <code>Clients/&lt;Client Name&gt;/Hermes Install/
+     01-Company-Info/
+     02-Buy-Box/
+     03-Scripts/
+     04-SOPs/
+     05-Jarvis-GHL/
+     06-Skills/
+     07-Final-Handoff/</code></li>
+<li>Pre-draft the knowledge-base markdown files from the intake (company overview, buy box, scripts, offer rules, guardrails). Use the standard KB structure — 9 files + index. Naming convention: <code>##-topic-name.md</code> (e.g., <code>02-buy-box.md</code>). You should walk into the call with 80% of the KB written.</li>
+<li>Confirm which AI path applies (see Phase 3 decision table) based on intake Q38–40.</li>
+<li>Open the Install Tracker (doc 05) and fill in the header.</li>
+<li>Log into the client's GHL sub-account (with their prior permission) and screenshot current pipelines, tags, and automations into <code>05-Jarvis-GHL/</code>.</li>
+</ol>
+<h2>Phase 1 — Call Open (5 min)</h2>
+<ol>
+<li>Confirm the client is at their computer with Telegram on both devices.</li>
+<li>Set expectations: "60–90 minutes; by the end JARVIS is live, trained, connected to your CRM, and you'll test it yourself."</li>
+<li>Share screen or have client share theirs. <strong>Client types their own passwords. We never receive, store, or screenshot credentials.</strong> If a token appears on screen, don't save the recording frame; paste tokens directly where they belong and into the client's own secure notes.</li>
+</ol>
+<h2>Phase 2 — Telegram Setup (10 min)</h2>
+<ol>
+<li>Client opens Telegram, searches <strong>@BotFather</strong>, sends <code>/newbot</code>.</li>
+<li>Bot display name: client's brand (e.g., "Anchor Home Offers AI"). Username must end in <code>bot</code>.</li>
+<li>BotFather returns the <strong>bot token</strong> → client pastes it straight into Hermes config (next phase) and into their own password manager. We record only "token saved: yes" in the tracker.</li>
+<li>Get the <strong>Telegram User ID / Chat ID</strong>:</li>
+<li>Use the Hermes-recommended ID bot first.</li>
+<li>Fallbacks: @userinfobot or @RawDataBot.</li>
+<li>Backup: have the client message their new bot, then pull the chat ID via the Bot API <code>getUpdates</code>.</li>
+<li>Record in tracker: bot username, user ID captured (yes/no).</li>
+</ol>
+<h2>Phase 3 — Hermes Install &amp; AI Connection (15–20 min)</h2>
+<ol>
+<li>Client downloads and installs <strong>Hermes Agent Desktop</strong> and <strong>Hermes Dashboard Desktop</strong>.</li>
+<li>Launch both; if terminal launch is required, walk them through it. Confirm agent shows <strong>online</strong> and dashboard sees the agent before proceeding.</li>
+<li>Client signs into their Hermes account. Confirm correct workspace.</li>
+</ol>
+<h3>AI model connection — decision table</h3>
+<table>
+<thead>
+<tr>
+<th>Client situation</th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wants Claude</td>
+<td><strong>API key path (default for Claude — see below)</strong></td>
+</tr>
+<tr>
+<td>Wants ChatGPT, has active subscription</td>
+<td>Subscription sign-in path</td>
+</tr>
+<tr>
+<td>Wants ChatGPT, needs direct billing or sign-in fails</td>
+<td>OpenAI API key path</td>
+</tr>
+<tr>
+<td>Needs a model not offered via sign-in</td>
+<td>API key path</td>
+</tr>
+</tbody>
+</table>
+<h3>⚠️ Claude = API key path, always (unless Quentin approves an exception)</h3>
+<p><strong>Why:</strong> subscription/OAuth sign-in has previously routed Hermes usage through the Claude Code OAuth credentials pool — silent, wrong-bucket billing that took real effort to diagnose. Do not repeat it.</p>
+<p>Steps:
+1. Client creates an Anthropic <strong>Console</strong> account (console.anthropic.com) — this is separate from a claude.ai chat subscription; a chat plan does not include API access.
+2. Client adds a payment method and <strong>sets a monthly spend limit</strong> matching their intake budget (Q40).
+3. Client creates an API key, pastes it directly into Hermes config, and saves it in their own password manager. The full key is shown once — save immediately.
+4. <strong>Pin the model in Hermes config to the designated cheaper tier for all calls.</strong> Do not leave model selection on default/auto.
+5. Verify in the Console usage page that the test calls (next step) show up there — this proves billing is on the key, not an OAuth pool.</p>
+<h3>Verification (all paths)</h3>
+<p>Ask via the Hermes interface:
+- "What AI model are you currently using?" → must name the pinned model.
+- "Respond with one sentence confirming you are ready to help with real estate wholesaling."</p>
+<h2>Phase 4 — White-Label Overlay (10 min) — DO NOT SKIP</h2>
+<p>The client must never see "Hermes" in the product.</p>
+<ol>
+<li>Apply the <strong>deploy-time overlay</strong> (standard overlay package) — never edit Hermes source files in place; in-place edits break on every upstream update.</li>
+<li>Overlay rebrands the ~8–10 customer-visible strings to <strong>JARVIS</strong>.</li>
+<li>Restart the agent, then verify: agent name in Telegram replies, dashboard title, any greeting/system strings. Ask the agent "what is your name?" → must answer JARVIS (branded), not Hermes.</li>
+<li>Record overlay version in the tracker.</li>
+</ol>
+<h2>Phase 5 — Connect Telegram to Hermes (5 min)</h2>
+<ol>
+<li>In Hermes Telegram settings, enter bot token + user ID.</li>
+<li>Test from the client's phone: "Hello JARVIS, confirm you are connected."</li>
+<li>If no reply: token correct? client pressed Start on the bot? user ID correct? agent running? → restart agent, retest.</li>
+</ol>
+<h2>Phase 6 — Train the Agent (15 min)</h2>
+<p>Upload the pre-drafted KB files from Phase 0, then fill gaps live with the client. Required set:</p>
+<ol>
+<li><code>01-company-overview.md</code> — business, market, team, brand voice, do-not-say list</li>
+<li><code>02-buy-box.md</code> — cities, zips, property types, equity, repairs, min spread, deal-killers</li>
+<li><code>03-lead-intake.md</code> — intake questions: motivation, condition, timeline, price, occupancy, mortgage/liens/probate</li>
+<li><code>04-scripts.md</code> — cold call, inbound, follow-up, objections, appointment confirm, offer explanation, dead-lead revival</li>
+<li><code>05-offer-comping.md</code> — ARV method, conservative comping, repair estimating, MAO formula, fee calc</li>
+<li><code>06-crm-sops.md</code> — pipeline stages, tags, custom fields, follow-up cadence, SMS rules</li>
+<li><code>07-disposition.md</code> — buyer list process, marketing, assignment vs double close</li>
+<li><code>08-guardrails.md</code> — see below, non-negotiable</li>
+<li><code>09-escalation.md</code> — hot-lead triggers, see below</li>
+<li><code>00-index.md</code> — file map</li>
+</ol>
+<h3>Guardrails (paste into every install's <code>08-guardrails.md</code>)</h3>
+<p>Agent must NOT: promise an offer or closing date; state a definitive property value; give legal or tax advice; tell a seller to stop paying a mortgage or ignore foreclosure notices; claim to be a licensed agent unless the client is; misrepresent identity; send mass SMS outside the client's compliance process; send offers/contracts/final approvals without client sign-off.</p>
+<p>Agent SHOULD: gather info, identify motivation, ask condition/timeline/price/occupancy/lien questions as intake only, summarize leads, recommend next steps, escalate hot leads.</p>
+<h3>Hot-lead escalation triggers (paste into <code>09-escalation.md</code>)</h3>
+<p>Sell now · vacant · behind on payments · non-paying tenant · inherited/probate · foreclosure · flexible on price · wants offer today · requests callback · gives access · has a competing offer.
+On any trigger: summarize → mark hot → tag in CRM → correct pipeline stage → notify client → recommend action.</p>
+<h3>Agent role prompt (base for every wholesaling client)</h3>
+<blockquote>
+<p>You are the client's real estate wholesaling operations assistant. You help manage seller leads, buyer leads, follow-up, CRM updates, appointment prep, offer prep, and daily execution. Think like an acquisitions and operations assistant. You are not a lawyer, tax advisor, or licensed agent unless the client says otherwise. Keep answers clear, direct, action-focused. Gather info, summarize motivation, identify urgency, recommend next steps. Escalate urgent or valuable leads immediately.</p>
+</blockquote>
+<h2>Phase 7 — Connect GHL ("Jarvis CRM") (15 min)</h2>
+<ol>
+<li>In the client's GHL sub-account: create a <strong>Private Integration token</strong> with minimum required scopes (contacts read/write, opportunities, tags, notes; add calendars only if booking is in scope). Avoid the legacy location API key when the private integration is available.</li>
+<li>Paste token into Hermes integrations → select correct location/sub-account → save.</li>
+</ol>
+<h3>⚠️ Hard technical rules (from prior production incidents)</h3>
+<ul>
+<li><strong>Tags:</strong> add via the additive endpoint <code>POST /contacts/{id}/tags</code>. <strong>Never</strong> send tags inside a contact upsert body — upsert replaces the whole tag array and re-fires tag-trigger automations (caused ~231 duplicate texts on a prior project).</li>
+<li>
+<p><strong>WAF:</strong> if API calls return Cloudflare blocks, set a browser-style User-Agent header on Hermes's GHL requests.</p>
+</li>
+<li>
+<p><strong>Field mapping — complete BEFORE any write test.</strong> Verify these exist (create or document as missing): first/last name, phone, email, property address/city/state/zip, lead source, motivation, timeline, asking price, est. repairs, occupancy, mortgage balance, arrears, liens, probate status, foreclosure status, appointment date, notes, pipeline stage, tags.</p>
+</li>
+<li>Pipeline mapping (create if missing): New Lead → Contacted → Qualified → Appointment Set → Offer Made → Follow Up → Contract Sent → Under Contract → Closed / Dead Lead.</li>
+<li>Standard tags: Hermes Lead (display: "JARVIS Lead"), Hot Seller, Follow Up, Needs Offer, Appointment Set, Dead Lead, Buyer Lead, Agent Lead, Probate, Foreclosure, Absentee Owner, Tired Landlord.</li>
+</ul>
+<h3>Agent permissions — default posture</h3>
+<p>ALLOW: read contacts, create/update contacts, notes, additive tags, move stages, create tasks, draft (not send) SMS/email, prepare lead summaries.
+REQUIRE CLIENT APPROVAL: sending SMS/email, booking appointments, triggering automations, offers, contracts, anything legal-adjacent.
+Adjust only with the client's explicit sign-off; record final permission set in the tracker.</p>
+<h2>Phase 8 — Automation Safety Review (10 min)</h2>
+<p>Before ANY live write, review with the client: tag triggers, stage triggers, form triggers, appointment triggers, active SMS/email campaigns, missed-call text back, nurture sequences, internal notifications.</p>
+<p>Identify which tags/stages fire messages. If a standard tag collides with an existing trigger, rename ours or pause theirs during testing.</p>
+<h2>Phase 9 — Testing (15 min) — all 7 must pass</h2>
+<p><strong>Standard test contact (every install, same convention):</strong>
+First: Hermes · Last: Test · Phone: client-approved test number · Email: hermestest@example.com · Address: 123 Test Property St · Source: Hermes Install Test · Tag: Hermes Test</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Test</th>
+<th>Prompt</th>
+<th>Pass condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Telegram</td>
+<td>"Are you connected?"</td>
+<td>Replies in Telegram as JARVIS</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Model</td>
+<td>"What model are you using and are you ready to help with wholesaling?"</td>
+<td>Names pinned model, confirms</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Knowledge</td>
+<td>"What is my buy box?"</td>
+<td>Answers from uploaded files, matches intake</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Business benefit</td>
+<td>"How can you benefit my wholesaling business?"</td>
+<td>Specific: intake, follow-up, comping, CRM, dispo, daily tasks</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Fake seller lead</td>
+<td>"Seller lead: John Smith, 123 Main St, San Antonio TX. House needs work, tenant not paying, wants to sell fast. What next?"</td>
+<td>Identifies motivated seller, asks missing info, recommends steps, clean summary</td>
+</tr>
+<tr>
+<td>6</td>
+<td>GHL write</td>
+<td>Have agent create/update the test contact</td>
+<td>Contact + notes + additive tags + correct stage in GHL; <strong>no unwanted automation fired</strong>; billing shows on the API key (Claude installs: check Console usage)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Escalation</td>
+<td>"This seller wants to sign today. What should you do?"</td>
+<td>Escalates to client, no promises</td>
+</tr>
+</tbody>
+</table>
+<p>After test 6: delete the test contact or leave it clearly tagged Hermes Test.</p>
+<h2>Phase 10 — Handoff (10 min)</h2>
+<ol>
+<li>Deliver the <strong>Client Handoff Playbook</strong> (doc 04) — JARVIS-branded version only.</li>
+<li>Walk through the daily workflow live: client sends "What should I focus on today in my wholesaling business?" <strong>from their own phone.</strong></li>
+<li>The install is not complete until the client personally sends a prompt and gets a business-specific answer.</li>
+<li>Final acceptance prompt (client sends it): <em>"How can you benefit my real estate wholesaling business, and what should I ask you every day to make more money?"</em> Answer must reference their market, buy box, lead process, and CRM.</li>
+<li>Schedule the Day-7 follow-up before ending the call.</li>
+<li>Complete the Install Tracker (doc 05) and file it in <code>07-Final-Handoff/</code>.</li>
+</ol>
+<h2>What NOT To Do</h2>
+<ul>
+<li>Don't start without a reviewed intake. Don't skip the white-label overlay. Don't use subscription sign-in for Claude. Don't leave model selection on auto. Don't put tags in upsert bodies. Don't test on real contacts. Don't let Hermes fire live automations unreviewed. Don't store client passwords anywhere. Don't end the call before the client drives a test themselves.</li>
+</ul>
+<h2>Troubleshooting Quick Reference</h2>
+<p><strong>Telegram bot silent:</strong> token correct → client pressed Start → user ID correct → agent running → signed in → integration enabled → restart agent.
+<strong>AI not responding (Claude/API):</strong> key valid → spend limit not hit → model pinned correctly → Console shows the traffic (if traffic is missing from Console but the agent works, STOP — it's billing through the wrong path; fix before continuing) → restart agent.
+<strong>AI not responding (ChatGPT sign-in):</strong> signed in → subscription active → correct model → usage cap → restart.
+<strong>GHL failing:</strong> right sub-account → token valid + scoped → Cloudflare block? add browser UA → fields exist → pipeline exists → tags exist → token not expired.
+<strong>Weak KB answers:</strong> sharpen buy box, add examples, more specific SOPs, clear do/don't rules, market detail → retest tests 3–5.</p>
+</main>
+<footer class="doc">
+  <span><span class="glowdot">●</span>&nbsp; JARVIS Agent Install System &nbsp;·&nbsp; Just Jarvis LLC</span>
+  <span>Doc 03 &nbsp;·&nbsp; v1.0 &nbsp;·&nbsp; CONFIDENTIAL</span>
+</footer>
+</div>
+</body>
+</html>

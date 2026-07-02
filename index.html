@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JARVIS Agent Install — Client Onboarding Kit</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep-black:#0A0A0A; --midnight:#0F172A; --electric:#3B82F6;
+  --light-blue:#60A5FA; --soft-gray:#E5E7EB; --dark-gray:#1F2937;
+  --muted:#94A3B8; --card:#0F172A; --line:rgba(59,130,246,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--deep-black);
+  background-image:radial-gradient(1200px 500px at 50% -10%, rgba(59,130,246,.10), transparent 60%);
+  color:var(--soft-gray);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:15.5px; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:880px;margin:0 auto;padding:0 28px 96px}
+
+/* ---------- Header ---------- */
+header.doc{
+  padding:56px 0 36px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:44px;
+  position:relative;
+}
+.brandline{display:flex;align-items:center;gap:14px;margin-bottom:34px}
+.xmark{
+  width:42px;height:42px;border-radius:10px;
+  background:linear-gradient(135deg,#1E3A8A 0%,#3B82F6 60%,#60A5FA 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:22px;color:#fff;
+  box-shadow:0 0 22px rgba(59,130,246,.55), inset 0 1px 0 rgba(255,255,255,.25);
+}
+.brandname{font-weight:700;font-size:15px;letter-spacing:.14em;color:#fff}
+.brandname span{color:var(--light-blue)}
+.brandtag{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.docmeta{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.docnum{
+  font-weight:800;font-size:13px;letter-spacing:.2em;color:var(--electric);
+  padding:5px 12px;border:1px solid var(--electric);border-radius:6px;
+  box-shadow:0 0 14px rgba(59,130,246,.35);
+}
+.badge{
+  font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  padding:6px 13px;border-radius:999px;
+}
+.badge.internal{color:#FCA5A5;background:rgba(220,38,38,.12);border:1px solid rgba(248,113,113,.4)}
+.badge.client{color:var(--light-blue);background:rgba(59,130,246,.12);border:1px solid rgba(96,165,250,.45)}
+h1.doctitle{
+  font-size:clamp(30px,5vw,42px);font-weight:800;letter-spacing:-.02em;color:#fff;
+  line-height:1.12;margin-bottom:10px;
+}
+.docsub{font-size:17px;color:var(--muted);font-weight:400;max-width:620px}
+
+/* ---------- Content ---------- */
+h1{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.01em;margin:52px 0 18px}
+main > h1:first-child{display:none} /* title already in header */
+h2{
+  font-size:20px;font-weight:700;color:#fff;margin:46px 0 16px;
+  padding-left:16px;border-left:3px solid var(--electric);
+  text-shadow:0 0 24px rgba(59,130,246,.25);
+}
+h3{font-size:15.5px;font-weight:700;color:var(--light-blue);margin:30px 0 12px;
+  letter-spacing:.02em}
+p{margin:0 0 14px;color:var(--soft-gray)}
+strong{color:#fff;font-weight:600}
+em{color:var(--muted)}
+a{color:var(--light-blue);text-decoration:none;border-bottom:1px solid rgba(96,165,250,.35)}
+hr{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--line) 20%,var(--line) 80%,transparent);margin:44px 0}
+ul,ol{margin:0 0 16px 22px}
+li{margin-bottom:7px}
+li::marker{color:var(--electric)}
+
+blockquote{
+  margin:20px 0;padding:18px 22px;border-left:3px solid var(--electric);
+  background:linear-gradient(90deg,rgba(59,130,246,.10),rgba(59,130,246,.02));
+  border-radius:0 10px 10px 0;color:var(--soft-gray);font-style:italic;
+}
+blockquote p:last-child{margin-bottom:0}
+
+code{
+  font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:.86em;
+  color:var(--light-blue);background:var(--dark-gray);
+  padding:2px 7px;border-radius:5px;border:1px solid rgba(96,165,250,.2);
+}
+pre{
+  background:#0B1120;border:1px solid var(--line);border-radius:12px;
+  padding:20px 22px;overflow-x:auto;margin:18px 0 22px;
+  box-shadow:inset 0 0 40px rgba(59,130,246,.05);
+}
+pre code{background:none;border:none;padding:0;color:var(--soft-gray);font-size:13px;line-height:1.6}
+
+table{
+  width:100%;border-collapse:separate;border-spacing:0;margin:20px 0 26px;
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px;
+}
+th{
+  background:linear-gradient(180deg,#13203E,var(--midnight));color:#fff;
+  font-weight:700;text-align:left;padding:12px 15px;font-size:12.5px;
+  letter-spacing:.06em;text-transform:uppercase;
+  border-bottom:1px solid var(--electric);
+}
+td{padding:12px 15px;border-bottom:1px solid rgba(148,163,184,.10);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:rgba(59,130,246,.035)}
+
+/* checklists */
+ul.tasks{list-style:none;margin-left:0}
+ul.tasks li{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:10px 14px;margin-bottom:8px;border-radius:10px;
+  background:rgba(15,23,42,.65);border:1px solid rgba(148,163,184,.10);
+}
+ul.tasks li:hover{border-color:var(--line)}
+.cb{
+  flex:none;width:18px;height:18px;margin-top:3px;border-radius:5px;
+  border:2px solid var(--electric);box-shadow:0 0 8px rgba(59,130,246,.35);
+}
+
+/* prompt blocks (client playbook) */
+.prompt{
+  font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13.5px;
+  background:#0B1120;border:1px solid rgba(96,165,250,.35);border-radius:10px;
+  padding:14px 18px;margin:12px 0;color:#DBEAFE;
+  box-shadow:0 0 18px rgba(59,130,246,.15), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.prompt::before{content:"› ";color:var(--electric);font-weight:700}
+
+/* callouts */
+.callout{
+  display:flex;gap:14px;padding:18px 20px;border-radius:12px;margin:22px 0;
+  background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(59,130,246,.04));
+  border:1px solid var(--line);
+}
+.callout.warn{
+  background:linear-gradient(135deg,rgba(220,38,38,.12),rgba(220,38,38,.03));
+  border-color:rgba(248,113,113,.35);
+}
+.callout .ic{flex:none;font-size:18px;line-height:1.4}
+
+footer.doc{
+  margin-top:80px;padding-top:26px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  font-size:12px;color:var(--muted);letter-spacing:.06em;
+}
+footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
+
+@media print{
+  body{background:var(--deep-black) !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (max-width:640px){
+  .page{padding:0 18px 64px}
+  header.doc{padding-top:36px}
+}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:36px}
+.card{display:block;background:var(--midnight);border:1px solid rgba(148,163,184,.12);border-radius:14px;
+  padding:22px;text-decoration:none;border-bottom:1px solid rgba(148,163,184,.12);transition:all .18s}
+.card:hover{border-color:var(--electric);box-shadow:0 0 26px rgba(59,130,246,.28);transform:translateY(-2px)}
+.cardtop{display:flex;justify-content:space-between;align-items:center}
+.flow{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--light-blue);
+  background:#0B1120;border:1px solid var(--line);border-radius:12px;padding:22px;line-height:2;margin-top:14px}
+.flow b{color:#fff}
+</style></head><body><div class="page">
+<header class="doc">
+  <div class="brandline">
+    <div class="xmark">X</div>
+    <div><div class="brandname">JARVIS <span>&times;</span> XCEREBRO AI</div>
+    <div class="brandtag">Your AI Employee. Runs Your Business 24/7.</div></div>
+  </div>
+  <h1 class="doctitle">Client Onboarding Kit</h1>
+  <p class="docsub">Everything to take a client from purchase to a JARVIS Agent they use every day — intake, install, handoff, and follow-up. Eight documents, one system.</p>
+</header>
+<main>
+<h2>The Flow</h2>
+<div class="flow">Purchase → <b>Intake Form</b> (01) → Team review 24h → <b>Booking + Checklist</b> (02) →<br>
+<b>Install Call</b> (03) → <b>Playbook Handoff</b> (04) + Tracker (05) →<br>
+<b>Day-7 Tune-Up</b> (06) → Day-30 Check-In → Active client &nbsp;<span style="color:var(--electric)">●</span><br>
+Email sequence (07) runs through the whole journey.</div>
+<h2>The Documents</h2>
+<div class="grid">
+    <a class="card" href="01-client-intake-form.html">
+      <div class="cardtop"><span class="docnum">DOC 01</span><span class="badge client">Client-Facing</span></div>
+      <h3 style="margin:14px 0 6px;color:#fff;font-size:17px">Client Intake Form</h3>
+      <p style="color:var(--muted);font-size:13.5px;margin:0">Sent after purchase. Every answer becomes agent training.</p>
+    </a>
+    <a class="card" href="02-pre-install-access-checklist.html">
+      <div class="cardtop"><span class="docnum">DOC 02</span><span class="badge client">Client-Facing</span></div>
+      <h3 style="margin:14px 0 6px;color:#fff;font-size:17px">Pre-Install Access Checklist</h3>
+      <p style="color:var(--muted);font-size:13.5px;margin:0">Sent 48h before the call. Logins tested ahead of time.</p>
+    </a>
+    <a class="card" href="03-team-install-sop.html">
+      <div class="cardtop"><span class="docnum">DOC 03</span><span class="badge internal">Internal</span></div>
+      <h3 style="margin:14px 0 6px;color:#fff;font-size:17px">Team Install SOP</h3>
+      <p style="color:var(--muted);font-size:13.5px;margin:0">The full install procedure, phase by phase.</p>
+    </a>
+    <a class="card" href="04-client-handoff-playbook.html">
+      <div class="cardtop"><span class="docnum">DOC 04</span><span class="badge client">Client-Facing</span></div>
+      <h3 style="margin:14px 0 6px;color:#fff;font-size:17px">Owner's Playbook</h3>
+      <p style="color:var(--muted);font-size:13.5px;margin:0">Delivered at handoff. Daily routine + prompt bank.</p>
+    </a>
+    <a class="card" href="05-install-tracker-qa.html">
+      <div class="cardtop"><span class="docnum">DOC 05</span><span class="badge internal">Internal</span></div>
+      <h3 style="margin:14px 0 6px;color:#fff;font-size:17px">Install Tracker & QA</h3>
+      <p style="color:var(--muted);font-size:13.5px;margin:0">One per client. Done means every box green.</p>
+    </a>
+    <a class="card" href="06-followup-support.html">
+      <div class="cardtop"><span class="docnum">DOC 06</span><span class="badge internal">Internal</span></div>
+      <h3 style="margin:14px 0 6px;color:#fff;font-size:17px">Follow-Up & Support</h3>
+      <p style="color:var(--muted);font-size:13.5px;margin:0">Day-7 tune-up and Day-30 check-in process.</p>
+    </a>
+    <a class="card" href="07-email-templates.html">
+      <div class="cardtop"><span class="docnum">DOC 07</span><span class="badge internal">Internal</span></div>
+      <h3 style="margin:14px 0 6px;color:#fff;font-size:17px">Email Sequence</h3>
+      <p style="color:var(--muted);font-size:13.5px;margin:0">Seven emails, purchase through re-engagement.</p>
+    </a>
+    <a class="card" href="00-README.html">
+      <div class="cardtop"><span class="docnum">DOC 00</span><span class="badge internal">Internal</span></div>
+      <h3 style="margin:14px 0 6px;color:#fff;font-size:17px">Kit Overview</h3>
+      <p style="color:var(--muted);font-size:13.5px;margin:0">Branding rules, flow map, and the six hard rules.</p>
+    </a></div>
+</main>
+<footer class="doc">
+  <span><span class="glowdot">●</span>&nbsp; JARVIS Agent Install System &nbsp;·&nbsp; Just Jarvis LLC</span>
+  <span>v1.0 &nbsp;·&nbsp; July 2026</span>
+</footer>
+</div></body></html>
