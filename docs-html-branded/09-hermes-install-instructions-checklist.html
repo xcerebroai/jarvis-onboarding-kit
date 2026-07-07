@@ -1,0 +1,260 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hermes Installation — Instructions &amp; Checklist</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep-black:#0A0A0A; --midnight:#0F172A; --electric:#3B82F6;
+  --light-blue:#60A5FA; --soft-gray:#E5E7EB; --dark-gray:#1F2937;
+  --muted:#94A3B8; --card:#0F172A; --line:rgba(59,130,246,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--deep-black);
+  background-image:radial-gradient(1200px 500px at 50% -10%, rgba(59,130,246,.10), transparent 60%);
+  color:var(--soft-gray);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:15.5px; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:880px;margin:0 auto;padding:0 28px 96px}
+
+/* ---------- Header ---------- */
+header.doc{
+  padding:56px 0 36px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:44px;
+  position:relative;
+}
+.brandline{display:flex;align-items:center;gap:14px;margin-bottom:34px}
+.xmark{
+  width:42px;height:42px;border-radius:10px;
+  background:linear-gradient(135deg,#1E3A8A 0%,#3B82F6 60%,#60A5FA 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:22px;color:#fff;
+  box-shadow:0 0 22px rgba(59,130,246,.55), inset 0 1px 0 rgba(255,255,255,.25);
+}
+.brandname{font-weight:700;font-size:15px;letter-spacing:.14em;color:#fff}
+.brandname span{color:var(--light-blue)}
+.brandtag{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.docmeta{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.docnum{
+  font-weight:800;font-size:13px;letter-spacing:.2em;color:var(--electric);
+  padding:5px 12px;border:1px solid var(--electric);border-radius:6px;
+  box-shadow:0 0 14px rgba(59,130,246,.35);
+}
+.badge{
+  font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  padding:6px 13px;border-radius:999px;
+}
+.badge.internal{color:#FCA5A5;background:rgba(220,38,38,.12);border:1px solid rgba(248,113,113,.4)}
+.badge.client{color:var(--light-blue);background:rgba(59,130,246,.12);border:1px solid rgba(96,165,250,.45)}
+h1.doctitle{
+  font-size:clamp(30px,5vw,42px);font-weight:800;letter-spacing:-.02em;color:#fff;
+  line-height:1.12;margin-bottom:10px;
+}
+.docsub{font-size:17px;color:var(--muted);font-weight:400;max-width:620px}
+
+/* ---------- Content ---------- */
+h1{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.01em;margin:52px 0 18px}
+main > h1:first-child{display:none} /* title already in header */
+h2{
+  font-size:20px;font-weight:700;color:#fff;margin:46px 0 16px;
+  padding-left:16px;border-left:3px solid var(--electric);
+  text-shadow:0 0 24px rgba(59,130,246,.25);
+}
+h3{font-size:15.5px;font-weight:700;color:var(--light-blue);margin:30px 0 12px;
+  letter-spacing:.02em}
+p{margin:0 0 14px;color:var(--soft-gray)}
+strong{color:#fff;font-weight:600}
+em{color:var(--muted)}
+a{color:var(--light-blue);text-decoration:none;border-bottom:1px solid rgba(96,165,250,.35)}
+hr{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--line) 20%,var(--line) 80%,transparent);margin:44px 0}
+ul,ol{margin:0 0 16px 22px}
+li{margin-bottom:7px}
+li::marker{color:var(--electric)}
+
+blockquote{
+  margin:20px 0;padding:18px 22px;border-left:3px solid var(--electric);
+  background:linear-gradient(90deg,rgba(59,130,246,.10),rgba(59,130,246,.02));
+  border-radius:0 10px 10px 0;color:var(--soft-gray);font-style:italic;
+}
+blockquote p:last-child{margin-bottom:0}
+
+code{
+  font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:.86em;
+  color:var(--light-blue);background:var(--dark-gray);
+  padding:2px 7px;border-radius:5px;border:1px solid rgba(96,165,250,.2);
+}
+pre{
+  background:#0B1120;border:1px solid var(--line);border-radius:12px;
+  padding:20px 22px;overflow-x:auto;margin:18px 0 22px;
+  box-shadow:inset 0 0 40px rgba(59,130,246,.05);
+}
+pre code{background:none;border:none;padding:0;color:var(--soft-gray);font-size:13px;line-height:1.6}
+
+table{
+  width:100%;border-collapse:separate;border-spacing:0;margin:20px 0 26px;
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px;
+}
+th{
+  background:linear-gradient(180deg,#13203E,var(--midnight));color:#fff;
+  font-weight:700;text-align:left;padding:12px 15px;font-size:12.5px;
+  letter-spacing:.06em;text-transform:uppercase;
+  border-bottom:1px solid var(--electric);
+}
+td{padding:12px 15px;border-bottom:1px solid rgba(148,163,184,.10);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:rgba(59,130,246,.035)}
+
+/* checklists */
+ul.tasks{list-style:none;margin-left:0}
+ul.tasks li{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:10px 14px;margin-bottom:8px;border-radius:10px;
+  background:rgba(15,23,42,.65);border:1px solid rgba(148,163,184,.10);
+}
+ul.tasks li:hover{border-color:var(--line)}
+.cb{
+  flex:none;width:18px;height:18px;margin-top:3px;border-radius:5px;
+  border:2px solid var(--electric);box-shadow:0 0 8px rgba(59,130,246,.35);
+}
+
+/* prompt blocks (client playbook) */
+.prompt{
+  font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13.5px;
+  background:#0B1120;border:1px solid rgba(96,165,250,.35);border-radius:10px;
+  padding:14px 18px;margin:12px 0;color:#DBEAFE;
+  box-shadow:0 0 18px rgba(59,130,246,.15), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.prompt::before{content:"› ";color:var(--electric);font-weight:700}
+
+/* callouts */
+.callout{
+  display:flex;gap:14px;padding:18px 20px;border-radius:12px;margin:22px 0;
+  background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(59,130,246,.04));
+  border:1px solid var(--line);
+}
+.callout.warn{
+  background:linear-gradient(135deg,rgba(220,38,38,.12),rgba(220,38,38,.03));
+  border-color:rgba(248,113,113,.35);
+}
+.callout .ic{flex:none;font-size:18px;line-height:1.4}
+
+footer.doc{
+  margin-top:80px;padding-top:26px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  font-size:12px;color:var(--muted);letter-spacing:.06em;
+}
+footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
+
+@media print{
+  body{background:var(--deep-black) !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (max-width:640px){
+  .page{padding:0 18px 64px}
+  header.doc{padding-top:36px}
+}
+
+.step{background:var(--midnight);border:1px solid rgba(148,163,184,.12);border-radius:16px;
+  padding:24px 26px;margin:22px 0;position:relative;border-left:3px solid var(--electric)}
+.stepnum{position:absolute;top:-14px;left:20px;font-family:'JetBrains Mono',monospace;font-weight:600;
+  font-size:11px;letter-spacing:.16em;color:var(--light-blue);background:#0B1120;
+  border:1px solid var(--electric);border-radius:999px;padding:5px 14px;text-transform:uppercase;
+  box-shadow:0 0 14px rgba(59,130,246,.35)}
+.step h3{margin-top:4px;font-size:17px;color:#fff}
+.oschip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:999px;margin-right:6px}
+.oschip.mac{color:#E5E7EB;background:rgba(229,231,235,.08);border:1px solid rgba(229,231,235,.25)}
+.oschip.win{color:var(--light-blue);background:rgba(59,130,246,.10);border:1px solid rgba(96,165,250,.35)}
+.stopbox{display:flex;gap:12px;background:linear-gradient(90deg,rgba(220,38,38,.14),rgba(220,38,38,.03));
+  border:1px solid rgba(248,113,113,.4);border-radius:10px;padding:13px 16px;margin:14px 0;color:#FECACA;font-weight:500}
+.parthead{display:flex;align-items:center;gap:16px;margin:56px 0 10px}
+.parthead .pn{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12px;letter-spacing:.2em;
+  color:#0A0A0A;background:linear-gradient(135deg,var(--electric),var(--light-blue));
+  border-radius:8px;padding:8px 16px;box-shadow:0 0 22px rgba(59,130,246,.45)}
+.parthead h1{margin:0;font-size:24px}
+.checksec{background:#0B1120;border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin:18px 0}
+.checksec h3{margin-top:0;color:var(--light-blue)}
+.fieldrow{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--soft-gray);
+  background:var(--midnight);border:1px dashed rgba(148,163,184,.3);border-radius:10px;
+  padding:14px 18px;margin:20px 0;line-height:2.1}
+.fieldrow b{color:#fff}
+.blank{display:inline-block;min-width:130px;border-bottom:1px solid rgba(148,163,184,.45)}
+.blank.sm{min-width:70px}
+.chk{display:inline-block;width:13px;height:13px;border:1.5px solid var(--electric);border-radius:3px;
+  vertical-align:-2px;margin:0 3px;box-shadow:0 0 6px rgba(59,130,246,.3)}
+.notes{min-height:56px;border-bottom:1px solid rgba(148,163,184,.3);margin-top:6px}
+</style></head><body><div class="page">
+<header class="doc">
+  <div class="brandline"><div class="xmark">X</div>
+    <div><div class="brandname">JARVIS <span>&times;</span> XCEREBRO AI</div>
+    <div class="brandtag">Your AI Employee. Runs Your Business 24/7.</div></div></div>
+  <div class="docmeta"><span class="docnum">DOC 09</span><span class="badge internal">Internal — Generalized For All Installs</span></div>
+  <h1 class="doctitle">Hermes Installation<br>Instructions &amp; Checklist</h1>
+  <p class="docsub">Part 1 walks the install step by step. Part 2 is the print-ready per-machine checklist. Mac Terminal &amp; Windows PowerShell.</p>
+</header>
+<main><div class="parthead"><span class="pn">PART 1</span><h1>Step-by-Step Instructions</h1></div>
+<p style="color:var(--muted)">Follow in order. “You” = whoever is at the keyboard.</p>
+<div class="step"><div class="stepnum">STEP 1</div><h3>Open the shell</h3><p><span class="oschip mac">Mac</span>Cmd+Space → type <code>terminal</code> → Enter<br><span class="oschip win">Windows</span>Start → type <code>powershell</code> → Enter</p></div>
+<div class="step"><div class="stepnum">STEP 2</div><h3>Check prerequisites</h3><pre><code>node --version
+</code></pre>
+<pre><code>python3 --version      (Mac)
+python --version       (Windows)
+</code></pre>
+<p>Need <strong>Node v18+</strong> and <strong>Python 3.10+</strong>.</p>
+<ul>
+<li><strong>Node missing</strong> → nodejs.org → <strong>LTS</strong> installer, defaults (Mac chip: Apple menu → About This Mac)</li>
+<li><strong>Python missing (Windows)</strong> → python.org installer → tick <strong>“Add Python to PATH”</strong> on the FIRST screen</li>
+<li><strong>Mac:</strong> “command line developer tools” popup → click <strong>Install</strong> (includes Git, 5–15 min). No popup? <code>xcode-select --install</code></li>
+<li><strong>Windows:</strong> do NOT pre-install Git — the Hermes installer handles it</li>
+</ul></div>
+<div class="step"><div class="stepnum">STEP 3</div><h3>Network pre-flight</h3><pre><code>curl -I https://api.telegram.org
+</code></pre>
+<ul>
+<li>HTTP response back → network clear, continue</li>
+<li>Hangs or redirects → network blocks Telegram → switch to a phone hotspot for the install; fix the network permanently afterward</li>
+</ul></div>
+<div class="step"><div class="stepnum">STEP 4</div><h3>Run the Hermes installer</h3><ol>
+<li>Download the Hermes Desktop installer from the standard source and launch it</li>
+<li>The <strong>“System prerequisites — X of 11 steps”</strong> screen appears with a Live Output panel — let it run untouched</li>
+<li><strong>Mac:</strong> stuck at 0 of 11? The Apple developer-tools dialog is hiding behind your windows — find it, click Install, let it finish; the installer resumes (relaunch if it doesn't within 2 minutes)</li>
+<li>Let ALL steps finish, including “Download Hermes Agent” — never cancel mid-way</li>
+</ol>
+<p>Install locations: <span class="oschip mac">Mac</span><code>~/.hermes/hermes-agent</code> · <span class="oschip win">Windows</span><code>C:\Users\&lt;username&gt;\AppData\Local\hermes\hermes-agent</code></p></div>
+<div class="step"><div class="stepnum">STEP 5</div><h3>Verify</h3><div class="stopbox"><span>⚠️</span><div>Close the shell entirely and open a <b>FRESH</b> one — new commands are invisible to old sessions.</div></div><pre><code>hermes --version
+</code></pre>
+<p>Expected: version banner — agent version (0.18+), Python version, project path.</p>
+<p>Still “command not found” in a fresh shell? Run the full path — if it works, the install is fine (PATH issue only):
+- Mac: <code>~/.hermes/hermes-agent/venv/bin/hermes --version</code>
+- Windows: <code>...\hermes-agent\venv\Scripts\hermes --version</code></p></div>
+<div class="step"><div class="stepnum">STEP 6</div><h3>First run</h3><pre><code>hermes gateway
+</code></pre>
+<p>A healthy first run prints the <strong>“Hermes Gateway Starting… Messaging platforms + cron scheduler”</strong> box. Messages about a missing provider or channels are <strong>the setup to-do list, not errors.</strong></p></div>
+<div class="step"><div class="stepnum">STEP 7</div><h3>Continue setup in the Hermes app</h3><ol>
+<li><strong>AI provider:</strong> API-key path ONLY — “I have an API key” → key goes in the <strong>Anthropic</strong> row → OpenRouter row must be EMPTY → never click the OAuth sign-in → pin the model to <strong>Sonnet</strong></li>
+<li><strong>Messaging:</strong> bot token + numeric user ID → allowlist filled → allow-all = false → Save</li>
+<li>Knowledge base, CRM, and acceptance testing per the Install Cheat Sheet</li>
+</ol></div>
+<div class="step"><div class="stepnum">STEP 8</div><h3>Make it survive reboots</h3><ul>
+<li><span class="oschip win">Windows</span>open PowerShell <strong>as Administrator</strong> → <code>hermes gateway install</code></li>
+<li><span class="oschip mac">Mac</span><code>hermes gateway --help</code> → use the service/install option</li>
+<li>Reboot test: restart the machine → the agent answers on its channel with no app opened manually</li>
+</ul></div>
+<div class="parthead"><span class="pn">PART 2</span><h1>Per-Install Checklist</h1></div>
+<p style="color:var(--muted)">Print or duplicate one per machine. Install is complete only when every box is checked.</p>
+<div class="fieldrow"><b>Machine:</b> <span class="blank"></span> &nbsp; <b>OS:</b> <span class="chk"></span> Mac &nbsp;<span class="chk"></span> Windows &nbsp; <b>Date:</b> <span class="blank sm"></span> &nbsp; <b>Installed by:</b> <span class="blank"></span></div>
+<div class="checksec"><h3>A. Prerequisites</h3><ul class="tasks"><li class="task"><span class="cb"></span><span>Shell opened (Terminal / PowerShell)</span></li><li class="task"><span class="cb"></span><span><code>node --version</code> → v18+ (installed from nodejs.org if missing)</span></li><li class="task"><span class="cb"></span><span>Python 3.10+ confirmed (Windows: “Add Python to PATH” was ticked)</span></li><li class="task"><span class="cb"></span><span>Mac only: developer tools installed (popup accepted or <code>xcode-select --install</code>)</span></li><li class="task"><span class="cb"></span><span>Windows only: Git NOT pre-installed (installer handles it)</span></li><li class="task"><span class="cb"></span><span>Network pre-flight run → Telegram reachable YES / NO → hotspot used if blocked</span></li></ul></div>
+<div class="checksec"><h3>B. Installation</h3><ul class="tasks"><li class="task"><span class="cb"></span><span>Hermes installer downloaded from standard source</span></li><li class="task"><span class="cb"></span><span>Prerequisites phase completed all 11 steps (no cancel/relaunch mid-way)</span></li><li class="task"><span class="cb"></span><span>Mac only: developer-tools dialog found and accepted if installer stalled</span></li><li class="task"><span class="cb"></span><span>Install completed through “Download Hermes Agent”</span></li></ul></div>
+<div class="checksec"><h3>C. Verification</h3><ul class="tasks"><li class="task"><span class="cb"></span><span>FRESH shell opened after install</span></li><li class="task"><span class="cb"></span><span><code>hermes --version</code> returns banner — version recorded: ______</span></li><li class="task"><span class="cb"></span><span>Version is 0.18+ (if 0.17 on Windows: note flashing-window patch may be needed)</span></li><li class="task"><span class="cb"></span><span><code>hermes gateway</code> first run prints the startup box</span></li></ul></div>
+<div class="checksec"><h3>D. App-side setup</h3><ul class="tasks"><li class="task"><span class="cb"></span><span>Provider connected via <b>API key</b> — Anthropic row verified · OpenRouter row EMPTY</span></li><li class="task"><span class="cb"></span><span>OAuth sign-in NEVER used</span></li><li class="task"><span class="cb"></span><span>Model pinned to <b>Sonnet</b></span></li><li class="task"><span class="cb"></span><span>Gateway status reads <b>ready</b></span></li><li class="task"><span class="cb"></span><span>Messaging: token pasted · numeric user ID in allowlist · allow-all = false · saved</span></li><li class="task"><span class="cb"></span><span>Round-trip test: message from an allowed phone → bot replies</span></li></ul></div>
+<div class="checksec"><h3>E. Durability</h3><ul class="tasks"><li class="task"><span class="cb"></span><span>Auto-start installed (Windows: PowerShell as Admin → <code>hermes gateway install</code> / Mac: service option)</span></li><li class="task"><span class="cb"></span><span>Reboot test passed (or scheduled: ______)</span></li></ul></div>
+<div class="checksec"><h3>F. Sign-off</h3><ul class="tasks"><li class="task"><span class="cb"></span><span>All boxes above checked — install COMPLETE</span></li></ul></div>
+<div class="fieldrow"><b>Notes / open items:</b><div class="notes"></div><div class="notes"></div></div>
+<h2>Quick Fixes</h2><table><thead><tr><th>Symptom</th><th>Fix</th></tr></thead><tbody><tr><td>“command not found” after install</td><td>Fresh shell → still failing → run the full venv path</td></tr><tr><td>Installer stuck at 0 of 11 (Mac)</td><td>Find + accept the hidden developer-tools dialog</td></tr><tr><td>Telegram “attempt 1/8” + DNS-over-HTTPS lines</td><td>Network block: hotspot → DNS 1.1.1.1 / 8.8.8.8 → router filtering whitelist → dedicated data line</td></tr><tr><td>Gateway weird after repeated launches (Windows)</td><td>Task Manager → end ALL hermes/python/node processes → launch once → wait 30s</td></tr><tr><td>App UI shows stale status after a fix</td><td>Full quit (system tray too) → reopen; the terminal log is the truth</td></tr></tbody></table></main>
+<footer class="doc">
+  <span><span class="glowdot">●</span>&nbsp; JARVIS Agent Install System &nbsp;·&nbsp; Just Jarvis LLC</span>
+  <span>Doc 09 &nbsp;·&nbsp; v1.1</span>
+</footer>
+</div></body></html>

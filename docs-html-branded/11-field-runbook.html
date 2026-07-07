@@ -1,0 +1,323 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent Field Runbook — Install → KB → Live</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep-black:#0A0A0A; --midnight:#0F172A; --electric:#3B82F6;
+  --light-blue:#60A5FA; --soft-gray:#E5E7EB; --dark-gray:#1F2937;
+  --muted:#94A3B8; --card:#0F172A; --line:rgba(59,130,246,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--deep-black);
+  background-image:radial-gradient(1200px 500px at 50% -10%, rgba(59,130,246,.10), transparent 60%);
+  color:var(--soft-gray);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:15.5px; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:880px;margin:0 auto;padding:0 28px 96px}
+
+/* ---------- Header ---------- */
+header.doc{
+  padding:56px 0 36px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:44px;
+  position:relative;
+}
+.brandline{display:flex;align-items:center;gap:14px;margin-bottom:34px}
+.xmark{
+  width:42px;height:42px;border-radius:10px;
+  background:linear-gradient(135deg,#1E3A8A 0%,#3B82F6 60%,#60A5FA 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:22px;color:#fff;
+  box-shadow:0 0 22px rgba(59,130,246,.55), inset 0 1px 0 rgba(255,255,255,.25);
+}
+.brandname{font-weight:700;font-size:15px;letter-spacing:.14em;color:#fff}
+.brandname span{color:var(--light-blue)}
+.brandtag{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.docmeta{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.docnum{
+  font-weight:800;font-size:13px;letter-spacing:.2em;color:var(--electric);
+  padding:5px 12px;border:1px solid var(--electric);border-radius:6px;
+  box-shadow:0 0 14px rgba(59,130,246,.35);
+}
+.badge{
+  font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  padding:6px 13px;border-radius:999px;
+}
+.badge.internal{color:#FCA5A5;background:rgba(220,38,38,.12);border:1px solid rgba(248,113,113,.4)}
+.badge.client{color:var(--light-blue);background:rgba(59,130,246,.12);border:1px solid rgba(96,165,250,.45)}
+h1.doctitle{
+  font-size:clamp(30px,5vw,42px);font-weight:800;letter-spacing:-.02em;color:#fff;
+  line-height:1.12;margin-bottom:10px;
+}
+.docsub{font-size:17px;color:var(--muted);font-weight:400;max-width:620px}
+
+/* ---------- Content ---------- */
+h1{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.01em;margin:52px 0 18px}
+main > h1:first-child{display:none} /* title already in header */
+h2{
+  font-size:20px;font-weight:700;color:#fff;margin:46px 0 16px;
+  padding-left:16px;border-left:3px solid var(--electric);
+  text-shadow:0 0 24px rgba(59,130,246,.25);
+}
+h3{font-size:15.5px;font-weight:700;color:var(--light-blue);margin:30px 0 12px;
+  letter-spacing:.02em}
+p{margin:0 0 14px;color:var(--soft-gray)}
+strong{color:#fff;font-weight:600}
+em{color:var(--muted)}
+a{color:var(--light-blue);text-decoration:none;border-bottom:1px solid rgba(96,165,250,.35)}
+hr{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--line) 20%,var(--line) 80%,transparent);margin:44px 0}
+ul,ol{margin:0 0 16px 22px}
+li{margin-bottom:7px}
+li::marker{color:var(--electric)}
+
+blockquote{
+  margin:20px 0;padding:18px 22px;border-left:3px solid var(--electric);
+  background:linear-gradient(90deg,rgba(59,130,246,.10),rgba(59,130,246,.02));
+  border-radius:0 10px 10px 0;color:var(--soft-gray);font-style:italic;
+}
+blockquote p:last-child{margin-bottom:0}
+
+code{
+  font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:.86em;
+  color:var(--light-blue);background:var(--dark-gray);
+  padding:2px 7px;border-radius:5px;border:1px solid rgba(96,165,250,.2);
+}
+pre{
+  background:#0B1120;border:1px solid var(--line);border-radius:12px;
+  padding:20px 22px;overflow-x:auto;margin:18px 0 22px;
+  box-shadow:inset 0 0 40px rgba(59,130,246,.05);
+}
+pre code{background:none;border:none;padding:0;color:var(--soft-gray);font-size:13px;line-height:1.6}
+
+table{
+  width:100%;border-collapse:separate;border-spacing:0;margin:20px 0 26px;
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px;
+}
+th{
+  background:linear-gradient(180deg,#13203E,var(--midnight));color:#fff;
+  font-weight:700;text-align:left;padding:12px 15px;font-size:12.5px;
+  letter-spacing:.06em;text-transform:uppercase;
+  border-bottom:1px solid var(--electric);
+}
+td{padding:12px 15px;border-bottom:1px solid rgba(148,163,184,.10);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:rgba(59,130,246,.035)}
+
+/* checklists */
+ul.tasks{list-style:none;margin-left:0}
+ul.tasks li{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:10px 14px;margin-bottom:8px;border-radius:10px;
+  background:rgba(15,23,42,.65);border:1px solid rgba(148,163,184,.10);
+}
+ul.tasks li:hover{border-color:var(--line)}
+.cb{
+  flex:none;width:18px;height:18px;margin-top:3px;border-radius:5px;
+  border:2px solid var(--electric);box-shadow:0 0 8px rgba(59,130,246,.35);
+}
+
+/* prompt blocks (client playbook) */
+.prompt{
+  font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13.5px;
+  background:#0B1120;border:1px solid rgba(96,165,250,.35);border-radius:10px;
+  padding:14px 18px;margin:12px 0;color:#DBEAFE;
+  box-shadow:0 0 18px rgba(59,130,246,.15), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.prompt::before{content:"› ";color:var(--electric);font-weight:700}
+
+/* callouts */
+.callout{
+  display:flex;gap:14px;padding:18px 20px;border-radius:12px;margin:22px 0;
+  background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(59,130,246,.04));
+  border:1px solid var(--line);
+}
+.callout.warn{
+  background:linear-gradient(135deg,rgba(220,38,38,.12),rgba(220,38,38,.03));
+  border-color:rgba(248,113,113,.35);
+}
+.callout .ic{flex:none;font-size:18px;line-height:1.4}
+
+footer.doc{
+  margin-top:80px;padding-top:26px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  font-size:12px;color:var(--muted);letter-spacing:.06em;
+}
+footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
+
+@media print{
+  body{background:var(--deep-black) !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (max-width:640px){
+  .page{padding:0 18px 64px}
+  header.doc{padding-top:36px}
+}
+
+.step{background:var(--midnight);border:1px solid rgba(148,163,184,.12);border-radius:16px;
+  padding:24px 26px;margin:26px 0;position:relative;border-left:3px solid var(--electric)}
+.stepnum{position:absolute;top:-14px;left:20px;font-family:'JetBrains Mono',monospace;font-weight:600;
+  font-size:11px;letter-spacing:.16em;color:var(--light-blue);background:#0B1120;
+  border:1px solid var(--electric);border-radius:999px;padding:5px 14px;text-transform:uppercase;
+  box-shadow:0 0 14px rgba(59,130,246,.35)}
+.step h3{margin-top:4px;font-size:17px;color:#fff}
+.oschip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:999px;margin-right:6px}
+.oschip.mac{color:#E5E7EB;background:rgba(229,231,235,.08);border:1px solid rgba(229,231,235,.25)}
+.oschip.win{color:var(--light-blue);background:rgba(59,130,246,.10);border:1px solid rgba(96,165,250,.35)}
+.stopbox{display:flex;gap:12px;background:linear-gradient(90deg,rgba(220,38,38,.14),rgba(220,38,38,.03));
+  border:1px solid rgba(248,113,113,.4);border-radius:10px;padding:13px 16px;margin:14px 0;color:#FECACA;font-weight:500}
+.okbox{display:flex;gap:12px;background:linear-gradient(90deg,rgba(34,197,94,.12),rgba(34,197,94,.02));
+  border:1px solid rgba(74,222,128,.35);border-radius:10px;padding:13px 16px;margin:14px 0;color:#BBF7D0}
+.prompt{font-family:'JetBrains Mono',monospace;font-size:13px;background:#0B1120;
+  border:1px solid rgba(96,165,250,.35);border-radius:10px;padding:14px 18px;margin:12px 0;color:#DBEAFE;
+  box-shadow:0 0 18px rgba(59,130,246,.12);white-space:pre-wrap;line-height:1.6}
+.prompt::before{content:"PASTE THIS ▸  ";color:var(--electric);font-weight:700;font-size:10px;letter-spacing:.14em}
+.expect{font-size:13px;color:var(--muted);margin:6px 0 16px;padding-left:14px;border-left:2px solid rgba(148,163,184,.25)}
+.flowbar{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--light-blue);
+  background:#0B1120;border:1px solid var(--line);border-radius:12px;padding:18px 22px;line-height:2;margin:22px 0}
+.flowbar b{color:#fff}
+.filegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;margin:14px 0}
+.filegrid div{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--soft-gray);
+  background:rgba(15,23,42,.7);border:1px solid rgba(148,163,184,.12);border-radius:8px;padding:9px 12px}
+.filegrid b{color:var(--light-blue)}
+</style></head><body><div class="page">
+<header class="doc">
+  <div class="brandline"><div class="xmark">X</div>
+    <div><div class="brandname">JARVIS <span>&times;</span> XCEREBRO AI</div>
+    <div class="brandtag">Your AI Employee. Runs Your Business 24/7.</div></div></div>
+  <div class="docmeta"><span class="docnum">DOC 11</span><span class="badge internal">Field Runbook — Start to Finish</span></div>
+  <h1 class="doctitle">AI Agent Field Runbook</h1>
+  <p class="docsub">Telegram, Hermes, Claude, the wholesale knowledge base, and every prompt to paste — from empty machine to a live agent qualifying leads. Eleven steps.</p>
+</header>
+<main><div class="flowbar"><b>THE WHOLE JOB:</b> Prereqs → Hermes → Claude key → Telegram bot → Wire → First contact → Load the KB → Lock operator values → Run it<br>~60–90 min on a clean machine. Every command and every prompt to paste is on this page.</div>
+<div class="step"><div class="stepnum">STEP 1</div><h3>Prerequisites + network check</h3><p><span class="oschip mac">Mac</span>Cmd+Space → <code>terminal</code> → Enter &nbsp;·&nbsp; <span class="oschip win">Windows</span>Start → <code>powershell</code> → Enter</p><pre><code>node --version                      # need v18+
+python3 --version                   # Mac — need 3.10+
+python --version                    # Windows
+curl -I https://api.telegram.org    # HTTP response = clear · hangs = blocked → use phone hotspot
+</code></pre>
+<ul>
+<li>Node missing → nodejs.org → LTS, defaults · Python missing (Win) → python.org, tick <strong>"Add Python to PATH"</strong></li>
+<li>Mac dev-tools popup → <strong>Install</strong> (brings Git). No popup: <code>xcode-select --install</code> · Windows: don't pre-install Git</li>
+</ul></div>
+<div class="step"><div class="stepnum">STEP 2</div><h3>Install Hermes</h3><ol>
+<li>Run the Hermes installer → let the <strong>"11 steps"</strong> finish untouched (Mac: accept the hidden dev-tools dialog if stuck at 0/11)</li>
+<li><strong>Close the shell. Open a FRESH one.</strong> Then:</li>
+</ol>
+<pre><code>hermes --version
+hermes gateway
+</code></pre><div class="okbox"><span>✅</span><div>Healthy = version banner + the <b>"Hermes Gateway Starting… Messaging platforms + cron scheduler"</b> box. "Provider not configured" = the to-do list, not an error.</div></div></div>
+<div class="step"><div class="stepnum">STEP 3</div><h3>Claude API key (browser — nothing installs)</h3><ol>
+<li><strong>console.anthropic.com</strong> → sign up (separate from claude.ai chat)</li>
+<li>Billing → card → starter credits ($5–25)</li>
+<li><strong>Settings → Limits → SET THE MONTHLY SPEND LIMIT</strong> — before any key exists</li>
+<li>API Keys → Create Key → copy with the <strong>Copy button</strong>. Format <code>sk-ant-api03-...</code> — shown ONCE, save immediately</li>
+</ol></div>
+<div class="step"><div class="stepnum">STEP 4</div><h3>Connect Claude in Hermes</h3><ol>
+<li>Provider screen → <strong>"I have an API key"</strong> → paste</li>
+</ol><div class="stopbox"><span>⛔</span><div><b>TWO TRAPS:</b> never click "Sign in with Anthropic OAuth" / never run <code>claude setup-token</code> (wrong billing path — Cancel any OAuth popup). And VERIFY THE SLOT: key in the <b>Anthropic</b> row, <b>OpenRouter row EMPTY</b> — the dialog has misfiled keys before.</div></div><ol>
+<li><strong>Pin the model to Sonnet</strong> (bottom-right; Opus ≈ 5× cost)</li>
+<li>Gateway reads <strong>ready</strong></li>
+</ol>
+<p>Errors: "authentication failed" = wrong slot/bad paste · "no usable credit" = unfunded or different account (key+money+account must match) · mentions "OpenRouter" = trash that entry, select Anthropic, restart</p></div>
+<div class="step"><div class="stepnum">STEP 5</div><h3>Create the Telegram bot (phone)</h3><ol>
+<li>Telegram search → <strong>@BotFather</strong> (verified — clones exist) → send <code>/newbot</code></li>
+<li>Display name = the business brand · username must end in <code>bot</code></li>
+<li>Save the returned <strong>token</strong> (<code>1234567890:AAE...</code>) — never in screenshots or group chats</li>
+<li><strong>Tap START on the new bot</strong> — bots can't speak first</li>
+</ol>
+<p><strong>Numeric user ID</strong> (a number, not the @username): message <strong>@userinfobot</strong> (exact handle) → Start → copy <code>Id:</code>. Fallback: message your own bot, then open <code>https://api.telegram.org/bot&lt;TOKEN&gt;/getUpdates</code> → find <code>"from":{"id":</code>. Lost the bot? BotFather → <code>/mybots</code>.</p></div>
+<div class="step"><div class="stepnum">STEP 6</div><h3>Wire Telegram in Hermes</h3><p><strong>Messaging → Telegram:</strong>
+1. Bot token → paste
+2. <strong>Allowed Telegram user IDs</strong> → the numeric ID(s), comma-separated
+3. <strong>Allow all users = false/empty. Always.</strong>
+4. <strong>Home channel ID</strong> = same user ID (enables agent-initiated alerts and crons)
+5. Save → if the UI shows a stale status, full quit (system tray too) and reopen</p></div>
+<div class="step"><div class="stepnum">STEP 7</div><h3>First contact</h3><p>From the phone, message the bot:</p><div class="prompt">Confirm you're connected.</div><div class="expect">✔ Expect: a reply in Telegram</div><div class="prompt">What AI model are you using?</div><div class="expect">✔ Expect: it names Sonnet — if it says Opus, go flip the selector</div><p><strong>Billing proof:</strong> console.anthropic.com → <strong>Usage</strong> — today's test traffic must appear there. Silent bot + "Connected" status = allowlist miss (numeric ID? saved?).</p></div>
+<div class="step"><div class="stepnum">STEP 8</div><h3>Deploy the knowledge base files</h3><ol>
+<li>Create the folder — <span class="oschip mac">Mac</span><code>~/Documents/JARVIS-Knowledge</code> · <span class="oschip win">Windows</span><code>Documents\JARVIS-Knowledge</code></li>
+<li>Copy in the 10 wholesale KB files:</li>
+</ol><div class="filegrid"><div><b>_INDEX</b> map + load order</div><div><b>00</b> operating doctrine — governs all</div><div><b>01</b> wholesale fundamentals</div><div><b>02</b> lead intake & qualification</div><div><b>03</b> seller communication</div><div><b>04</b> property analysis & offer</div><div><b>05</b> contracts & paperwork</div><div><b>06</b> pipeline & follow-up</div><div><b>07</b> disposition</div><div><b>08</b> quick reference</div></div><ol>
+<li>If the files are in Downloads, the agent can do the move itself:</li>
+</ol><div class="prompt">Search my Downloads folder for the wholesale knowledge base .md files (the _INDEX and 00–08 set). List what you find — don't move anything yet.</div><div class="expect">✔ Expect: it lists the 10 files; verify the names match before the next prompt</div><div class="prompt">Create the folder Documents\JARVIS-Knowledge (or ~/Documents/JARVIS-Knowledge on Mac), move those 10 files into it, then list the folder contents to confirm.</div></div>
+<div class="step"><div class="stepnum">STEP 9</div><h3>Load + persist the KB</h3><div class="prompt">Read every file in [folder path], starting with _INDEX.md, then 00_operating-doctrine.md — the doctrine governs everything else. These files are your permanent knowledge base and source of truth. Add a permanent instruction to your memory: at the start of every session, on any channel, read this folder before doing business tasks. Confirm the instruction is saved.</div><div class="expect">✔ Expect: confirmation + a memory-update acknowledgment</div><p><b>Verify it actually loaded</b> — ask all three:</p><div class="prompt">Summarize your operating doctrine in 3 bullets.</div><div class="expect">✔ Expect: no legal/financial advice · no fabricated numbers · escalate probate/title/distress to the operator</div><div class="prompt">What are the four pillars of lead qualification?</div><div class="expect">✔ Expect: Condition · Motivation · Timeline · Price/Mortgage</div><div class="prompt">Walk me through how you calculate MAO.</div><div class="expect">✔ Expect: MAO = ARV − repairs − end-buyer profit − assignment fee − closing costs, 70% rule labeled as a convention, and it should say it will NOT produce an offer with missing inputs</div></div>
+<div class="step"><div class="stepnum">STEP 10</div><h3>Lock the operator's values</h3><p>The KB ships universal on purpose — these numbers are per-operator (the _INDEX lists them). The agent will refuse to invent them, so give them now:</p><div class="prompt">Lock these operator values into your knowledge permanently — create a file operator-values.md in the knowledge folder with:
+- Buy areas / markets: [cities, counties, zips]
+- Property types we buy / avoid: [list]
+- Target end-buyer profit margin: [X% or $X]
+- Target assignment fee: [$X]
+- Default MAO percentage: [e.g. 70%] and closing-cost assumption: [$X or X%]
+- Repair standards: light $[X]/sqft · medium $[X]/sqft · heavy $[X]/sqft
+- EMD policy: [amount, holder]
+- Follow-up cadence overrides: [if any]
+Confirm the file is saved and read it back to me.</div><div class="expect">✔ Expect: it writes the file and reads back YOUR numbers</div><div class="stopbox"><span>⚠️</span><div>Do not skip this. Without operator values the agent answers like a textbook and (correctly) refuses to run offer math.</div></div></div>
+<div class="step"><div class="stepnum">STEP 11</div><h3>Run it — the agent is live</h3><p><strong>Acceptance test — paste a fake lead:</strong></p><div class="prompt">New seller lead: John Smith, 123 Main St. Says the house needs work, tenant stopped paying, wants out fast. Qualify this lead per your SOP and tell me the next action.</div><div class="expect">✔ Expect: it works the four pillars, tags the situation (tired-landlord, major-repairs...), tiers it, names what's missing, sets ONE next action — and does NOT invent an offer</div><p><strong>Daily driver prompts</strong> (these run the business day to day):</p><div class="prompt">Give me a pipeline snapshot: count by stage, everything due or overdue, hottest deals, and any record missing a next action.</div><div class="prompt">Draft a follow-up text for [seller] who said they'd think about it — per the seller-communication SOP.</div><div class="prompt">Run the numbers: ARV [$X] from these comps [paste], repairs look [light/medium/heavy], [sqft]. Give me the offer package.</div><p><strong>Optional — auto-start so it survives reboots:</strong> <span class="oschip win">Windows</span>Admin PowerShell → <code>hermes gateway install</code> · <span class="oschip mac">Mac</span><code>hermes gateway --help</code> → service option. Anytime: <code>hermes gateway status</code> / <code>hermes gateway restart</code></p></div>
+<h2>Done-state checklist</h2><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Check</th>
+<th>Pass looks like</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Gateway</td>
+<td>"ready" + startup box in terminal</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Provider</td>
+<td>Key in Anthropic row · OpenRouter empty · OAuth never touched</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Model</td>
+<td>Sonnet pinned</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Spend limit</td>
+<td>Set on the Console account</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Telegram</td>
+<td>Token · numeric ID allowlisted · allow-all false · bot replies</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Billing</td>
+<td>Traffic visible on Console Usage page</td>
+</tr>
+<tr>
+<td>7</td>
+<td>KB loaded</td>
+<td>Doctrine 3-bullet test + four pillars + MAO walkthrough all pass</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Operator values</td>
+<td>operator-values.md saved, read back with real numbers</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Fake-lead test</td>
+<td>Qualified per SOP, no invented numbers, one next action</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Reboot</td>
+<td>Bot answers after restart with no manual launch</td>
+</tr>
+</tbody>
+</table></main>
+<footer class="doc">
+  <span><span class="glowdot">●</span>&nbsp; JARVIS Agent Install System &nbsp;·&nbsp; Just Jarvis LLC</span>
+  <span>Doc 11 &nbsp;·&nbsp; v1.0</span>
+</footer>
+</div></body></html>

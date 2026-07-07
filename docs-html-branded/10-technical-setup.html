@@ -1,0 +1,343 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical Setup — Hermes · Claude · Telegram</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep-black:#0A0A0A; --midnight:#0F172A; --electric:#3B82F6;
+  --light-blue:#60A5FA; --soft-gray:#E5E7EB; --dark-gray:#1F2937;
+  --muted:#94A3B8; --card:#0F172A; --line:rgba(59,130,246,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--deep-black);
+  background-image:radial-gradient(1200px 500px at 50% -10%, rgba(59,130,246,.10), transparent 60%);
+  color:var(--soft-gray);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:15.5px; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:880px;margin:0 auto;padding:0 28px 96px}
+
+/* ---------- Header ---------- */
+header.doc{
+  padding:56px 0 36px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:44px;
+  position:relative;
+}
+.brandline{display:flex;align-items:center;gap:14px;margin-bottom:34px}
+.xmark{
+  width:42px;height:42px;border-radius:10px;
+  background:linear-gradient(135deg,#1E3A8A 0%,#3B82F6 60%,#60A5FA 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:22px;color:#fff;
+  box-shadow:0 0 22px rgba(59,130,246,.55), inset 0 1px 0 rgba(255,255,255,.25);
+}
+.brandname{font-weight:700;font-size:15px;letter-spacing:.14em;color:#fff}
+.brandname span{color:var(--light-blue)}
+.brandtag{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.docmeta{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.docnum{
+  font-weight:800;font-size:13px;letter-spacing:.2em;color:var(--electric);
+  padding:5px 12px;border:1px solid var(--electric);border-radius:6px;
+  box-shadow:0 0 14px rgba(59,130,246,.35);
+}
+.badge{
+  font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  padding:6px 13px;border-radius:999px;
+}
+.badge.internal{color:#FCA5A5;background:rgba(220,38,38,.12);border:1px solid rgba(248,113,113,.4)}
+.badge.client{color:var(--light-blue);background:rgba(59,130,246,.12);border:1px solid rgba(96,165,250,.45)}
+h1.doctitle{
+  font-size:clamp(30px,5vw,42px);font-weight:800;letter-spacing:-.02em;color:#fff;
+  line-height:1.12;margin-bottom:10px;
+}
+.docsub{font-size:17px;color:var(--muted);font-weight:400;max-width:620px}
+
+/* ---------- Content ---------- */
+h1{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.01em;margin:52px 0 18px}
+main > h1:first-child{display:none} /* title already in header */
+h2{
+  font-size:20px;font-weight:700;color:#fff;margin:46px 0 16px;
+  padding-left:16px;border-left:3px solid var(--electric);
+  text-shadow:0 0 24px rgba(59,130,246,.25);
+}
+h3{font-size:15.5px;font-weight:700;color:var(--light-blue);margin:30px 0 12px;
+  letter-spacing:.02em}
+p{margin:0 0 14px;color:var(--soft-gray)}
+strong{color:#fff;font-weight:600}
+em{color:var(--muted)}
+a{color:var(--light-blue);text-decoration:none;border-bottom:1px solid rgba(96,165,250,.35)}
+hr{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--line) 20%,var(--line) 80%,transparent);margin:44px 0}
+ul,ol{margin:0 0 16px 22px}
+li{margin-bottom:7px}
+li::marker{color:var(--electric)}
+
+blockquote{
+  margin:20px 0;padding:18px 22px;border-left:3px solid var(--electric);
+  background:linear-gradient(90deg,rgba(59,130,246,.10),rgba(59,130,246,.02));
+  border-radius:0 10px 10px 0;color:var(--soft-gray);font-style:italic;
+}
+blockquote p:last-child{margin-bottom:0}
+
+code{
+  font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:.86em;
+  color:var(--light-blue);background:var(--dark-gray);
+  padding:2px 7px;border-radius:5px;border:1px solid rgba(96,165,250,.2);
+}
+pre{
+  background:#0B1120;border:1px solid var(--line);border-radius:12px;
+  padding:20px 22px;overflow-x:auto;margin:18px 0 22px;
+  box-shadow:inset 0 0 40px rgba(59,130,246,.05);
+}
+pre code{background:none;border:none;padding:0;color:var(--soft-gray);font-size:13px;line-height:1.6}
+
+table{
+  width:100%;border-collapse:separate;border-spacing:0;margin:20px 0 26px;
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px;
+}
+th{
+  background:linear-gradient(180deg,#13203E,var(--midnight));color:#fff;
+  font-weight:700;text-align:left;padding:12px 15px;font-size:12.5px;
+  letter-spacing:.06em;text-transform:uppercase;
+  border-bottom:1px solid var(--electric);
+}
+td{padding:12px 15px;border-bottom:1px solid rgba(148,163,184,.10);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:rgba(59,130,246,.035)}
+
+/* checklists */
+ul.tasks{list-style:none;margin-left:0}
+ul.tasks li{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:10px 14px;margin-bottom:8px;border-radius:10px;
+  background:rgba(15,23,42,.65);border:1px solid rgba(148,163,184,.10);
+}
+ul.tasks li:hover{border-color:var(--line)}
+.cb{
+  flex:none;width:18px;height:18px;margin-top:3px;border-radius:5px;
+  border:2px solid var(--electric);box-shadow:0 0 8px rgba(59,130,246,.35);
+}
+
+/* prompt blocks (client playbook) */
+.prompt{
+  font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13.5px;
+  background:#0B1120;border:1px solid rgba(96,165,250,.35);border-radius:10px;
+  padding:14px 18px;margin:12px 0;color:#DBEAFE;
+  box-shadow:0 0 18px rgba(59,130,246,.15), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.prompt::before{content:"› ";color:var(--electric);font-weight:700}
+
+/* callouts */
+.callout{
+  display:flex;gap:14px;padding:18px 20px;border-radius:12px;margin:22px 0;
+  background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(59,130,246,.04));
+  border:1px solid var(--line);
+}
+.callout.warn{
+  background:linear-gradient(135deg,rgba(220,38,38,.12),rgba(220,38,38,.03));
+  border-color:rgba(248,113,113,.35);
+}
+.callout .ic{flex:none;font-size:18px;line-height:1.4}
+
+footer.doc{
+  margin-top:80px;padding-top:26px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  font-size:12px;color:var(--muted);letter-spacing:.06em;
+}
+footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
+
+@media print{
+  body{background:var(--deep-black) !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (max-width:640px){
+  .page{padding:0 18px 64px}
+  header.doc{padding-top:36px}
+}
+
+.step{background:var(--midnight);border:1px solid rgba(148,163,184,.12);border-radius:16px;
+  padding:24px 26px;margin:24px 0;position:relative;border-left:3px solid var(--electric)}
+.stepnum{position:absolute;top:-14px;left:20px;font-family:'JetBrains Mono',monospace;font-weight:600;
+  font-size:11px;letter-spacing:.16em;color:var(--light-blue);background:#0B1120;
+  border:1px solid var(--electric);border-radius:999px;padding:5px 14px;text-transform:uppercase;
+  box-shadow:0 0 14px rgba(59,130,246,.35)}
+.step h3{margin-top:4px;font-size:17px;color:#fff}
+.oschip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:999px;margin-right:6px}
+.oschip.mac{color:#E5E7EB;background:rgba(229,231,235,.08);border:1px solid rgba(229,231,235,.25)}
+.oschip.win{color:var(--light-blue);background:rgba(59,130,246,.10);border:1px solid rgba(96,165,250,.35)}
+.stopbox{display:flex;gap:12px;background:linear-gradient(90deg,rgba(220,38,38,.14),rgba(220,38,38,.03));
+  border:1px solid rgba(248,113,113,.4);border-radius:10px;padding:13px 16px;margin:14px 0;color:#FECACA;font-weight:500}
+.okbox{display:flex;gap:12px;background:linear-gradient(90deg,rgba(34,197,94,.12),rgba(34,197,94,.02));
+  border:1px solid rgba(74,222,128,.35);border-radius:10px;padding:13px 16px;margin:14px 0;color:#BBF7D0}
+.sendmsg{font-family:'JetBrains Mono',monospace;font-size:13.5px;background:#0B1120;
+  border:1px solid rgba(96,165,250,.35);border-radius:10px;padding:13px 17px;margin:10px 0;color:#DBEAFE;
+  box-shadow:0 0 18px rgba(59,130,246,.12)}
+.sendmsg::before{content:"› ";color:var(--electric);font-weight:700}
+.flowbar{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--light-blue);
+  background:#0B1120;border:1px solid var(--line);border-radius:12px;padding:18px 22px;line-height:2;margin:22px 0}
+.flowbar b{color:#fff}
+</style></head><body><div class="page">
+<header class="doc">
+  <div class="brandline"><div class="xmark">X</div>
+    <div><div class="brandname">JARVIS <span>&times;</span> XCEREBRO AI</div>
+    <div class="brandtag">Your AI Employee. Runs Your Business 24/7.</div></div></div>
+  <div class="docmeta"><span class="docnum">DOC 10</span><span class="badge internal">Technical Setup — No Business Prep Required</span></div>
+  <h1 class="doctitle">Hermes · Claude · Telegram<br>Start to Finish</h1>
+  <p class="docsub">Pure plumbing — every command, code, and screen in one page. No intake form, no knowledge base, no CRM. Just a working agent answering on Telegram.</p>
+</header>
+<main><div class="flowbar"><b>THE WHOLE JOB:</b> Prereqs → Install Hermes → Claude key → Telegram bot → Wire it → Test → Auto-start<br>
+~45–60 minutes on a clean machine. Every command and code you need is on this page.</div>
+<div class="step"><div class="stepnum">STEP 1</div><h3>Prerequisites</h3><p><span class="oschip mac">Mac</span>Cmd+Space → <code>terminal</code> → Enter &nbsp;·&nbsp; <span class="oschip win">Windows</span>Start → <code>powershell</code> → Enter</p><pre><code>node --version
+python3 --version     # Mac
+python --version      # Windows
+</code></pre>
+<p>Need <strong>Node v18+</strong>, <strong>Python 3.10+</strong>.</p>
+<ul>
+<li>Node missing → <strong>nodejs.org</strong> → LTS installer, defaults</li>
+<li>Python missing (Windows) → <strong>python.org</strong> → tick <strong>"Add Python to PATH"</strong> on the first screen</li>
+<li>Mac dev-tools popup → <strong>Install</strong> (brings Git). No popup: <code>xcode-select --install</code></li>
+<li>Windows: don't pre-install Git — the installer pulls it</li>
+</ul>
+<p><strong>Network check (do not skip):</strong></p>
+<pre><code>curl -I https://api.telegram.org
+</code></pre>
+<p>HTTP response = clear. Hangs/redirect = network blocks Telegram → do the whole setup on a phone hotspot; fix the network after.</p></div>
+<div class="step"><div class="stepnum">STEP 2<div class="okbox"><span>✅</span><div>Healthy first run prints the <b>"Hermes Gateway Starting… Messaging platforms + cron scheduler"</b> box. "Provider not configured" complaints are the to-do list, not errors.</div></div></div><h3>Install Hermes</h3><ol>
+<li>Run the Hermes Desktop installer → let the <strong>"11 steps"</strong> prerequisites phase finish untouched (Mac: accept the dev-tools dialog if it stalls at 0/11)</li>
+<li><strong>Close the shell. Open a FRESH one.</strong> Then:</li>
+</ol>
+<pre><code>hermes --version
+</code></pre>
+<p>Version banner = installed. Then:</p>
+<pre><code>hermes gateway
+</code></pre><div class="okbox"><span>✅</span><div>Healthy first run prints the <b>"Hermes Gateway Starting… Messaging platforms + cron scheduler"</b> box. "Provider not configured" complaints are the to-do list, not errors.</div></div></div>
+<div class="step"><div class="stepnum">STEP 3</div><h3>Get the Claude API key</h3><p><strong>In the browser</strong> (nothing installs — Claude is a key, not a program):</p>
+<ol>
+<li><strong>console.anthropic.com</strong> → sign up (separate from claude.ai chat — a chat subscription does NOT include API)</li>
+<li><strong>Billing</strong> → add card → buy starter credits ($5–25)</li>
+<li><strong>Settings → Limits → set the monthly spend limit</strong> — before creating any key</li>
+<li><strong>API Keys → Create Key</strong> → copy with the <strong>Copy button</strong> (never drag-select — stray spaces break keys)</li>
+</ol>
+<p>The key looks like: <code>sk-ant-api03-xxxxxxxx...</code> — shown ONCE. Save it in a password manager immediately.</p></div>
+<div class="step"><div class="stepnum">STEP 4</div><h3>Connect Claude in Hermes</h3><ol>
+<li>Hermes provider screen → click <strong>"I have an API key"</strong> (bottom of the screen)</li>
+<li>Paste the key</li>
+</ol><div class="stopbox"><span>⛔</span><div><b>Two traps:</b> (1) NEVER click "Sign in with Anthropic OAuth" or run <code>claude setup-token</code> — wrong billing path. Cancel any popup mentioning OAuth. (2) VERIFY THE SLOT — the key must sit in the <b>Anthropic</b> row; the <b>OpenRouter row must be EMPTY</b>. The dialog has dropped keys into OpenRouter before.</div></div><ol>
+<li><strong>Pin the model to Sonnet</strong> (bottom-right selector — if it says Opus, switch; Opus ≈ 5× cost)</li>
+<li>Gateway status bottom-left should read <strong>ready</strong></li>
+</ol>
+<p><strong>Error decoder:</strong> "authentication failed" = wrong slot / bad paste · "no usable credit" = account unfunded or key from a different account (key + money + account must match) · error mentions "OpenRouter" = trash the OpenRouter entry entirely, select Anthropic, restart</p></div>
+<div class="step"><div class="stepnum">STEP 5</div><h3>Create the Telegram bot</h3><p>On the phone:</p>
+<ol>
+<li>Telegram search → <strong>@BotFather</strong> (verified check — clones exist) → send:</li>
+</ol>
+<pre><code>/newbot
+</code></pre>
+<ol>
+<li>Display name → any name · Username → must end in <code>bot</code> (e.g. <code>MyAgentBot</code>)</li>
+<li>BotFather returns the <strong>bot token</strong>:</li>
+</ol>
+<pre><code>1234567890:AAExxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+</code></pre>
+<p>Save it. Never post it in screenshots or group chats.
+4. <strong>Tap START on the new bot</strong> — bots can't speak first</p>
+<p><strong>Get the numeric user ID</strong> (needed for the allowlist — it's a number, not the @username):
+- Message <strong>@userinfobot</strong> (exact handle, verified) → Start → copy the <code>Id:</code> number
+- Fallback: message your own bot once, then open in a browser:</p>
+<pre><code>https://api.telegram.org/bot&lt;TOKEN&gt;/getUpdates
+</code></pre>
+<p>→ find <code>"from":{"id":</code> → that number is you
+- Lost the bot later? BotFather → <code>/mybots</code> → tap the bot → tap its @username</p></div>
+<div class="step"><div class="stepnum">STEP 6</div><h3>Wire Telegram in Hermes</h3><p>Hermes → <strong>Messaging → Telegram</strong>:</p>
+<ol>
+<li><strong>Bot token</strong> → paste</li>
+<li><strong>Allowed Telegram user IDs</strong> → the numeric ID (comma-separate multiple people)</li>
+<li><strong>Allow all users</strong> → false / empty. Always. An open bot is anyone burning your API money</li>
+<li><strong>Home channel ID</strong> → same user ID (lets the agent send scheduled messages/alerts on its own)</li>
+<li><strong>Save changes</strong> → fully restart Hermes if status looks stale (quit from system tray too)</li>
+</ol></div>
+<div class="step"><div class="stepnum">STEP 7<div class="sendmsg">confirm you're connected</div><div class="sendmsg">What AI model are you using?</div><ul>
+<li>Bot replies + names <strong>Sonnet</strong> = both pipes work</li>
+<li>Then the billing proof: <strong>console.anthropic.com → Usage</strong> — today's test messages must appear there. Traffic on the Usage page = billing is on YOUR key with YOUR spend limit</li>
+<li>Bot silent but status says Connected = allowlist miss (numeric ID, saved?) — or you're messaging from the account the agent itself is linked to</li>
+</ul></div><h3>Test everything</h3><p>From the phone, message the bot:</p><div class="sendmsg">confirm you're connected</div><div class="sendmsg">What AI model are you using?</div><ul>
+<li>Bot replies + names <strong>Sonnet</strong> = both pipes work</li>
+<li>Then the billing proof: <strong>console.anthropic.com → Usage</strong> — today's test messages must appear there. Traffic on the Usage page = billing is on YOUR key with YOUR spend limit</li>
+<li>Bot silent but status says Connected = allowlist miss (numeric ID, saved?) — or you're messaging from the account the agent itself is linked to</li>
+</ul></div>
+<div class="step"><div class="stepnum">STEP 8</div><h3>Make it survive reboots</h3><ul>
+<li><span class="oschip win">Windows</span>PowerShell <strong>as Administrator</strong> →</li>
+</ul>
+<pre><code>hermes gateway install
+</code></pre>
+<p>(without admin it silently falls back to a fragile Startup-folder script)
+- <span class="oschip mac">Mac</span><code>hermes gateway --help</code> → service/install option
+- Final proof: reboot the machine → bot answers with no app opened manually</p>
+<p>Useful anytime:</p>
+<pre><code>hermes gateway status
+hermes gateway restart
+</code></pre></div>
+<h2>Done-state checklist</h2><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Check</th>
+<th>Pass looks like</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>hermes --version</code></td>
+<td>Version banner in a fresh shell</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Gateway</td>
+<td>"ready" bottom-left, startup box in terminal</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Provider</td>
+<td>Key in Anthropic row · OpenRouter empty · OAuth never used</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Model</td>
+<td>Sonnet pinned</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Spend limit</td>
+<td>Set on the Console account</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Telegram</td>
+<td>Token saved · numeric ID allowlisted · allow-all false</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Round-trip</td>
+<td>Bot replies from an allowed phone</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Billing</td>
+<td>Traffic visible on Console Usage page</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Reboot</td>
+<td>Agent answers after restart, no manual launch</td>
+</tr>
+</tbody>
+</table></main>
+<footer class="doc">
+  <span><span class="glowdot">●</span>&nbsp; JARVIS Agent Install System &nbsp;·&nbsp; Just Jarvis LLC</span>
+  <span>Doc 10 &nbsp;·&nbsp; v1.0</span>
+</footer>
+</div></body></html>

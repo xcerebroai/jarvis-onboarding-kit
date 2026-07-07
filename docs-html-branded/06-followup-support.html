@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>06 · Follow-Up & Support — JARVIS Onboarding Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep-black:#0A0A0A; --midnight:#0F172A; --electric:#3B82F6;
+  --light-blue:#60A5FA; --soft-gray:#E5E7EB; --dark-gray:#1F2937;
+  --muted:#94A3B8; --card:#0F172A; --line:rgba(59,130,246,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--deep-black);
+  background-image:radial-gradient(1200px 500px at 50% -10%, rgba(59,130,246,.10), transparent 60%);
+  color:var(--soft-gray);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:15.5px; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:880px;margin:0 auto;padding:0 28px 96px}
+
+/* ---------- Header ---------- */
+header.doc{
+  padding:56px 0 36px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:44px;
+  position:relative;
+}
+.brandline{display:flex;align-items:center;gap:14px;margin-bottom:34px}
+.xmark{
+  width:42px;height:42px;border-radius:10px;
+  background:linear-gradient(135deg,#1E3A8A 0%,#3B82F6 60%,#60A5FA 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:22px;color:#fff;
+  box-shadow:0 0 22px rgba(59,130,246,.55), inset 0 1px 0 rgba(255,255,255,.25);
+}
+.brandname{font-weight:700;font-size:15px;letter-spacing:.14em;color:#fff}
+.brandname span{color:var(--light-blue)}
+.brandtag{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.docmeta{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.docnum{
+  font-weight:800;font-size:13px;letter-spacing:.2em;color:var(--electric);
+  padding:5px 12px;border:1px solid var(--electric);border-radius:6px;
+  box-shadow:0 0 14px rgba(59,130,246,.35);
+}
+.badge{
+  font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  padding:6px 13px;border-radius:999px;
+}
+.badge.internal{color:#FCA5A5;background:rgba(220,38,38,.12);border:1px solid rgba(248,113,113,.4)}
+.badge.client{color:var(--light-blue);background:rgba(59,130,246,.12);border:1px solid rgba(96,165,250,.45)}
+h1.doctitle{
+  font-size:clamp(30px,5vw,42px);font-weight:800;letter-spacing:-.02em;color:#fff;
+  line-height:1.12;margin-bottom:10px;
+}
+.docsub{font-size:17px;color:var(--muted);font-weight:400;max-width:620px}
+
+/* ---------- Content ---------- */
+h1{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.01em;margin:52px 0 18px}
+main > h1:first-child{display:none} /* title already in header */
+h2{
+  font-size:20px;font-weight:700;color:#fff;margin:46px 0 16px;
+  padding-left:16px;border-left:3px solid var(--electric);
+  text-shadow:0 0 24px rgba(59,130,246,.25);
+}
+h3{font-size:15.5px;font-weight:700;color:var(--light-blue);margin:30px 0 12px;
+  letter-spacing:.02em}
+p{margin:0 0 14px;color:var(--soft-gray)}
+strong{color:#fff;font-weight:600}
+em{color:var(--muted)}
+a{color:var(--light-blue);text-decoration:none;border-bottom:1px solid rgba(96,165,250,.35)}
+hr{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--line) 20%,var(--line) 80%,transparent);margin:44px 0}
+ul,ol{margin:0 0 16px 22px}
+li{margin-bottom:7px}
+li::marker{color:var(--electric)}
+
+blockquote{
+  margin:20px 0;padding:18px 22px;border-left:3px solid var(--electric);
+  background:linear-gradient(90deg,rgba(59,130,246,.10),rgba(59,130,246,.02));
+  border-radius:0 10px 10px 0;color:var(--soft-gray);font-style:italic;
+}
+blockquote p:last-child{margin-bottom:0}
+
+code{
+  font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:.86em;
+  color:var(--light-blue);background:var(--dark-gray);
+  padding:2px 7px;border-radius:5px;border:1px solid rgba(96,165,250,.2);
+}
+pre{
+  background:#0B1120;border:1px solid var(--line);border-radius:12px;
+  padding:20px 22px;overflow-x:auto;margin:18px 0 22px;
+  box-shadow:inset 0 0 40px rgba(59,130,246,.05);
+}
+pre code{background:none;border:none;padding:0;color:var(--soft-gray);font-size:13px;line-height:1.6}
+
+table{
+  width:100%;border-collapse:separate;border-spacing:0;margin:20px 0 26px;
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px;
+}
+th{
+  background:linear-gradient(180deg,#13203E,var(--midnight));color:#fff;
+  font-weight:700;text-align:left;padding:12px 15px;font-size:12.5px;
+  letter-spacing:.06em;text-transform:uppercase;
+  border-bottom:1px solid var(--electric);
+}
+td{padding:12px 15px;border-bottom:1px solid rgba(148,163,184,.10);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:rgba(59,130,246,.035)}
+
+/* checklists */
+ul.tasks{list-style:none;margin-left:0}
+ul.tasks li{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:10px 14px;margin-bottom:8px;border-radius:10px;
+  background:rgba(15,23,42,.65);border:1px solid rgba(148,163,184,.10);
+}
+ul.tasks li:hover{border-color:var(--line)}
+.cb{
+  flex:none;width:18px;height:18px;margin-top:3px;border-radius:5px;
+  border:2px solid var(--electric);box-shadow:0 0 8px rgba(59,130,246,.35);
+}
+
+/* prompt blocks (client playbook) */
+.prompt{
+  font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13.5px;
+  background:#0B1120;border:1px solid rgba(96,165,250,.35);border-radius:10px;
+  padding:14px 18px;margin:12px 0;color:#DBEAFE;
+  box-shadow:0 0 18px rgba(59,130,246,.15), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.prompt::before{content:"› ";color:var(--electric);font-weight:700}
+
+/* callouts */
+.callout{
+  display:flex;gap:14px;padding:18px 20px;border-radius:12px;margin:22px 0;
+  background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(59,130,246,.04));
+  border:1px solid var(--line);
+}
+.callout.warn{
+  background:linear-gradient(135deg,rgba(220,38,38,.12),rgba(220,38,38,.03));
+  border-color:rgba(248,113,113,.35);
+}
+.callout .ic{flex:none;font-size:18px;line-height:1.4}
+
+footer.doc{
+  margin-top:80px;padding-top:26px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  font-size:12px;color:var(--muted);letter-spacing:.06em;
+}
+footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
+
+@media print{
+  body{background:var(--deep-black) !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (max-width:640px){
+  .page{padding:0 18px 64px}
+  header.doc{padding-top:36px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="doc">
+  <div class="brandline">
+    <div class="xmark">X</div>
+    <div>
+      <div class="brandname">JARVIS <span>&times;</span> XCEREBRO AI</div>
+      <div class="brandtag">Your AI Employee. Runs Your Business 24/7.</div>
+    </div>
+  </div>
+  <div class="docmeta">
+    <span class="docnum">DOC 06</span>
+    <span class="badge internal">Internal Only — Do Not Send</span>
+  </div>
+  <h1 class="doctitle">Follow-Up & Support</h1>
+  <p class="docsub">Day-7 and Day-30 process</p>
+</header>
+<main>
+<p>Most agents get dramatically better in week one — once we see what the client actually asks, we tune the knowledge base to match. That's why the Day-7 call is mandatory, not optional.</p>
+<hr />
+<h2>Day 7 Check-In (15–20 min call or Loom exchange)</h2>
+<p><strong>Owner:</strong> Marc/Alexia schedule; installer runs it.</p>
+<h3>Agenda</h3>
+<ol>
+<li><strong>Usage:</strong> "How many days did you actually use JARVIS this week? What did you ask it most?"</li>
+<li><strong>Wins:</strong> Get one specific win on record (fodder for testimonial later).</li>
+<li><strong>Friction:</strong> "Where did it give you a weak or wrong answer?" — every weak answer is a KB gap. Fix live on the call if possible: sharpen buy box, add examples, add do/don't rules, add market specifics.</li>
+<li><strong>Technical sweep (internal, run during or right after):</strong></li>
+<li>Telegram round-trip test</li>
+<li>Model confirmation test ("what model are you using?")</li>
+<li><strong>Claude installs: open the Console usage page with the client — confirm traffic appears there and spend is on track vs. their limit.</strong> If the agent works but Console shows no traffic, billing is leaking through the wrong path — stop and fix.</li>
+<li>GHL round-trip: agent updates the test contact; verify additive tags, no automation misfires</li>
+<li><strong>Habit check:</strong> Is the daily routine happening? If not, simplify it — even just the morning "what should I focus on today" prompt.</li>
+<li><strong>Expand:</strong> Any new use case they want? (buyer outreach, VA training, KPI recap) — add the skill or KB module.</li>
+<li>Update tracker (doc 05, Day-7 section) and send recap email (template #5).</li>
+</ol>
+<h3>Common Day-7 fixes</h3>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Generic answers</td>
+<td>Buy box too vague — add numbers, zips, deal-killers</td>
+</tr>
+<tr>
+<td>Wrong tone in follow-ups</td>
+<td>Add 3–5 real examples of the client's actual texts</td>
+</tr>
+<tr>
+<td>Doesn't push leads to CRM right</td>
+<td>Re-check field mapping; confirm additive tag endpoint</td>
+</tr>
+<tr>
+<td>Client stopped using it</td>
+<td>Reduce routine to ONE daily prompt; rebook a 10-min habit call</td>
+</tr>
+<tr>
+<td>Claude bill higher than expected</td>
+<td>Confirm model pin didn't get reset; check spend limit</td>
+</tr>
+</tbody>
+</table>
+<h2>Day 30 Check-In (10 min, message or call)</h2>
+<ol>
+<li>Usage frequency: daily / weekly / rarely</li>
+<li>If rarely → offer a free 20-min re-training session before they churn</li>
+<li>If daily → ask for a testimonial (video preferred) and referral</li>
+<li>Expansion pitch where it fits: additional team seats, more skills, custom automations, county intel dashboard cross-sell</li>
+<li>Log outcome in tracker</li>
+</ol>
+<h2>Ongoing Support Rules</h2>
+<ul>
+<li>Client-facing support channel: [Skool community / support email / Telegram support handle]</li>
+<li>First response within 1 business day</li>
+<li>"Agent down" issues jump the queue: restart agent → Telegram token/ID → model connection → GHL token → escalate to Quentin</li>
+<li>Every recurring support issue becomes a line in the Install SOP troubleshooting section — the SOP is a living doc</li>
+<li>Hermes upstream updates: because branding is a deploy-time overlay, updates are safe — but after any update, re-run the white-label verification ("what is your name?") and the 7 core tests on the internal test install before pushing to clients</li>
+</ul>
+</main>
+<footer class="doc">
+  <span><span class="glowdot">●</span>&nbsp; JARVIS Agent Install System &nbsp;·&nbsp; Just Jarvis LLC</span>
+  <span>Doc 06 &nbsp;·&nbsp; v1.0 &nbsp;·&nbsp; CONFIDENTIAL</span>
+</footer>
+</div>
+</body>
+</html>
