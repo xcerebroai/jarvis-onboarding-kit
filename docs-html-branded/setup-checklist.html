@@ -83,6 +83,27 @@ li.done .tasktext{color:var(--muted);text-decoration:line-through;text-decoratio
 .stopbox{display:flex;gap:10px;background:linear-gradient(90deg,rgba(220,38,38,.12),rgba(220,38,38,.02));
   border:1px solid rgba(248,113,113,.35);border-radius:10px;padding:11px 14px;margin:12px 0 14px;color:#FECACA;font-size:13px;font-weight:500}
 
+/* collapsible step instructions */
+details.how{margin:2px 0 14px;border:1px solid rgba(96,165,250,.22);border-radius:11px;
+  background:rgba(11,17,32,.55);overflow:hidden}
+details.how[open]{border-color:var(--line)}
+details.how summary{list-style:none;cursor:pointer;padding:11px 16px;font-size:12.5px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--light-blue);display:flex;align-items:center;gap:9px;user-select:none}
+details.how summary::-webkit-details-marker{display:none}
+details.how summary::before{content:"▸";transition:transform .18s;font-size:11px}
+details.how[open] summary::before{transform:rotate(90deg)}
+.howbody{padding:2px 18px 16px;font-size:14px}
+.howbody ol{margin:6px 0 6px 20px}.howbody li{margin-bottom:7px;color:var(--soft-gray)}
+.howbody p{margin:8px 0}
+.howbody code{font-family:'JetBrains Mono',monospace;font-size:.85em;color:var(--light-blue);
+  background:var(--dark-gray);padding:2px 6px;border-radius:5px;border:1px solid rgba(96,165,250,.2)}
+.cmd{font-family:'JetBrains Mono',monospace;font-size:12.5px;background:#0B1120;border:1px solid var(--line);
+  border-radius:9px;padding:12px 15px;margin:10px 0;color:var(--soft-gray);white-space:pre-wrap;line-height:1.7;overflow-x:auto}
+.prompt{font-family:'JetBrains Mono',monospace;font-size:12.5px;background:#0B1120;border:1px solid rgba(96,165,250,.35);
+  border-radius:9px;padding:12px 15px;margin:9px 0;color:#DBEAFE;white-space:pre-wrap;line-height:1.6}
+.prompt::before{content:"PASTE THIS ▸  ";color:var(--electric);font-weight:700;font-size:10px;letter-spacing:.12em}
+.expect{font-size:12.5px;color:var(--muted);margin:4px 0 10px;padding-left:12px;border-left:2px solid rgba(148,163,184,.25)}
+
 footer.doc{margin-top:70px;padding-top:24px;border-top:1px solid var(--line);
   display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
   font-size:12px;color:var(--muted);letter-spacing:.06em}
@@ -113,6 +134,15 @@ footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
 
 <div class="step"><div class="stepnum">Step 1</div><h3>Prerequisites &amp; network check</h3>
 <p class="stepnote">Open Terminal (Mac) or PowerShell (Windows) first.</p>
+<details class="how"><summary>How to do this step</summary><div class="howbody">
+<p><strong>Open a terminal:</strong> Mac — <code>Cmd+Space</code> → type <code>terminal</code> → Enter. Windows — Start → type <code>powershell</code> → Enter.</p>
+<p>Run each line and read the result:</p>
+<div class="cmd">node --version                      # need v18+
+python3 --version                   # Mac — need 3.10+
+python --version                    # Windows
+curl -I https://api.telegram.org    # a response = clear · hangs = blocked → use a phone hotspot</div>
+<p><strong>If something's missing:</strong> Node → install the LTS build from <code>nodejs.org</code> (accept defaults). Python on Windows → <code>python.org</code>, and tick <strong>"Add Python to PATH"</strong> during install. Mac dev-tools popup → click <strong>Install</strong> (this also brings Git); no popup → run <code>xcode-select --install</code>. On Windows, don't pre-install Git.</p>
+</div></details>
 <ul class="tasks">
   <li><span class="tasktext">Node v18+ installed (<code>node --version</code>) — if missing, install LTS from nodejs.org</span></li>
   <li><span class="tasktext">Python 3.10+ installed (<code>python3 --version</code> / <code>python --version</code>) — on Windows tick <strong>"Add Python to PATH"</strong></span></li>
@@ -121,6 +151,16 @@ footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
 </ul></div>
 
 <div class="step"><div class="stepnum">Step 2</div><h3>Install Hermes</h3>
+<details class="how"><summary>How to do this step</summary><div class="howbody">
+<ol>
+<li>Run the Hermes installer and let the <strong>"11 steps"</strong> finish untouched. (Mac: if it's stuck at 0/11, accept the hidden dev-tools dialog behind the window.)</li>
+<li><strong>Close the shell completely, then open a FRESH one</strong> — the new commands only exist in a new window.</li>
+</ol>
+<p>Then verify:</p>
+<div class="cmd">hermes --version
+hermes gateway</div>
+<p><strong>Healthy =</strong> a version banner plus the <em>"Hermes Gateway Starting… Messaging platforms + cron scheduler"</em> box. Seeing <em>"Provider not configured"</em> is just the to-do list — not an error.</p>
+</div></details>
 <ul class="tasks">
   <li><span class="tasktext">Ran the Hermes installer and let the "11 steps" finish untouched</span></li>
   <li><span class="tasktext">Closed the shell and opened a <strong>fresh</strong> one</span></li>
@@ -130,6 +170,14 @@ footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
 
 <div class="step"><div class="stepnum">Step 3</div><h3>Claude API key</h3>
 <p class="stepnote">In the browser — nothing installs here.</p>
+<details class="how"><summary>How to do this step</summary><div class="howbody">
+<ol>
+<li>Go to <strong>console.anthropic.com</strong> and sign up. (This is the developer console — it's separate from the claude.ai chat site.)</li>
+<li>Open <strong>Billing</strong> → add a card → buy starter credits ($5–25).</li>
+<li><strong>Settings → Limits → set the monthly spend limit</strong> — do this <em>before</em> you create any key, so spend is capped from the start.</li>
+<li><strong>API Keys → Create Key</strong> → copy it with the Copy button. It looks like <code>sk-ant-api03-…</code> and is shown <strong>only once</strong> — paste it somewhere safe immediately.</li>
+</ol>
+</div></details>
 <ul class="tasks">
   <li><span class="tasktext">Signed up at <strong>console.anthropic.com</strong> (separate from claude.ai chat)</span></li>
   <li><span class="tasktext">Added billing / starter credits ($5–25)</span></li>
@@ -138,6 +186,17 @@ footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
 </ul></div>
 
 <div class="step"><div class="stepnum">Step 4</div><h3>Connect Claude in Hermes</h3>
+<details class="how"><summary>How to do this step</summary><div class="howbody">
+<ol>
+<li>On the provider screen, choose <strong>"I have an API key"</strong> and paste your key.</li>
+</ol>
+<div class="stopbox"><span>⛔</span><div><strong>Two traps:</strong> never click "Sign in with Anthropic OAuth" and never run <code>claude setup-token</code> (wrong billing path — Cancel any OAuth popup). And check the slot: the key goes in the <strong>Anthropic</strong> row, with the <strong>OpenRouter row empty</strong>.</div></div>
+<ol start="2">
+<li><strong>Pin the model to Sonnet</strong> (bottom-right of the provider panel) — Opus is roughly 5× the cost.</li>
+<li>The gateway should now read <strong>ready</strong>.</li>
+</ol>
+<p><strong>If you hit an error:</strong> "authentication failed" = wrong slot or a bad paste · "no usable credit" = account isn't funded, or the key belongs to a different account (key + money + account must all match) · anything mentioning "OpenRouter" = delete that entry, select Anthropic, and restart.</p>
+</div></details>
 <ul class="tasks">
   <li><span class="tasktext">Chose <strong>"I have an API key"</strong> and pasted it into the <strong>Anthropic</strong> row</span></li>
   <li><span class="tasktext">Verified the <strong>OpenRouter row is empty</strong> and never touched OAuth / <code>claude setup-token</code></span></li>
@@ -147,6 +206,15 @@ footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
 
 <div class="step"><div class="stepnum">Step 5</div><h3>Create the Telegram bot</h3>
 <p class="stepnote">On your phone.</p>
+<details class="how"><summary>How to do this step</summary><div class="howbody">
+<ol>
+<li>In Telegram search, open <strong>@BotFather</strong> (the verified one — clones exist) and send <code>/newbot</code>.</li>
+<li>Set the <strong>display name</strong> = your business brand. Set the <strong>username</strong> — it must end in <code>bot</code>.</li>
+<li>Save the <strong>token</strong> it gives back (looks like <code>1234567890:AAE…</code>) — never put it in screenshots or group chats.</li>
+<li><strong>Tap START on your new bot</strong> — bots can't message you first.</li>
+</ol>
+<p><strong>Get your numeric user ID</strong> (a number, not your @username): message <strong>@userinfobot</strong> → Start → copy the <code>Id:</code> value. Fallback: message your own bot, then open <code>https://api.telegram.org/bot&lt;TOKEN&gt;/getUpdates</code> and find <code>"from":{"id":</code>. Lost the bot later? BotFather → <code>/mybots</code>.</p>
+</div></details>
 <ul class="tasks">
   <li><span class="tasktext">Messaged the verified <strong>@BotFather</strong> and sent <code>/newbot</code></span></li>
   <li><span class="tasktext">Set a display name (business brand) and a username ending in <code>bot</code></span></li>
@@ -156,6 +224,16 @@ footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
 </ul></div>
 
 <div class="step"><div class="stepnum">Step 6</div><h3>Wire Telegram in Hermes</h3>
+<details class="how"><summary>How to do this step</summary><div class="howbody">
+<p>In Hermes, go to <strong>Messaging → Telegram</strong>:</p>
+<ol>
+<li>Paste the <strong>bot token</strong>.</li>
+<li><strong>Allowed Telegram user IDs</strong> → enter your numeric ID(s), comma-separated.</li>
+<li><strong>Allow all users = false / empty. Always.</strong> (Otherwise anyone who finds the bot can run it.)</li>
+<li><strong>Home channel ID</strong> = the same numeric user ID — this lets the agent send you alerts and run scheduled tasks.</li>
+<li>Save. If the status looks stale, fully quit Hermes (including the system-tray icon) and reopen.</li>
+</ol>
+</div></details>
 <ul class="tasks">
   <li><span class="tasktext">Pasted the bot token (Messaging → Telegram)</span></li>
   <li><span class="tasktext">Added your numeric ID to <strong>Allowed Telegram user IDs</strong></span></li>
@@ -164,6 +242,14 @@ footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
 </ul></div>
 
 <div class="step"><div class="stepnum">Step 7</div><h3>First contact</h3>
+<details class="how"><summary>How to do this step</summary><div class="howbody">
+<p>From your phone, message the bot:</p>
+<div class="prompt">Confirm you're connected.</div>
+<div class="expect">✔ Expect a reply in Telegram.</div>
+<div class="prompt">What AI model are you using?</div>
+<div class="expect">✔ Expect it to name <strong>Sonnet</strong>. If it says Opus, go back and flip the model selector (Step 4).</div>
+<p><strong>Billing proof:</strong> open console.anthropic.com → <strong>Usage</strong> — today's test messages must show up there. A silent bot while the status says "Connected" almost always means the allowlist is wrong (did you use the numeric ID, and did you Save?).</p>
+</div></details>
 <ul class="tasks">
   <li><span class="tasktext">Messaged the bot "Confirm you're connected" and got a reply</span></li>
   <li><span class="tasktext">Asked "What AI model are you using?" — it answered <strong>Sonnet</strong></span></li>
@@ -171,6 +257,16 @@ footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
 </ul></div>
 
 <div class="step"><div class="stepnum">Step 8</div><h3>Deploy the knowledge base files</h3>
+<details class="how"><summary>How to do this step</summary><div class="howbody">
+<ol>
+<li>Create the folder — Mac: <code>~/Documents/JARVIS-Knowledge</code> · Windows: <code>Documents\JARVIS-Knowledge</code>.</li>
+<li>Copy in the 10 wholesale KB files: <code>_INDEX</code> plus <code>00</code>–<code>08</code> (operating doctrine, fundamentals, lead intake, seller comms, property analysis &amp; offer, contracts, pipeline, disposition, quick reference).</li>
+</ol>
+<p>If the files are sitting in Downloads, the agent can move them itself — send these two prompts:</p>
+<div class="prompt">Search my Downloads folder for the wholesale knowledge base .md files (the _INDEX and 00–08 set). List what you find — don't move anything yet.</div>
+<div class="expect">✔ Expect it to list the 10 files; check the names before continuing.</div>
+<div class="prompt">Create the folder Documents\JARVIS-Knowledge (or ~/Documents/JARVIS-Knowledge on Mac), move those 10 files into it, then list the folder contents to confirm.</div>
+</div></details>
 <ul class="tasks">
   <li><span class="tasktext">Created the folder <code>Documents/JARVIS-Knowledge</code></span></li>
   <li><span class="tasktext">Moved in the 10 wholesale KB files (_INDEX + 00–08)</span></li>
@@ -178,6 +274,18 @@ footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
 </ul></div>
 
 <div class="step"><div class="stepnum">Step 9</div><h3>Load &amp; persist the KB</h3>
+<details class="how"><summary>How to do this step</summary><div class="howbody">
+<p>Point the agent at the folder and make it permanent:</p>
+<div class="prompt">Read every file in [folder path], starting with _INDEX.md, then 00_operating-doctrine.md — the doctrine governs everything else. These files are your permanent knowledge base and source of truth. Add a permanent instruction to your memory: at the start of every session, on any channel, read this folder before doing business tasks. Confirm the instruction is saved.</div>
+<div class="expect">✔ Expect confirmation plus a memory-update acknowledgment.</div>
+<p><strong>Then verify it actually loaded</strong> — ask all three:</p>
+<div class="prompt">Summarize your operating doctrine in 3 bullets.</div>
+<div class="expect">✔ No legal/financial advice · no fabricated numbers · escalate probate/title/distress to the operator.</div>
+<div class="prompt">What are the four pillars of lead qualification?</div>
+<div class="expect">✔ Condition · Motivation · Timeline · Price/Mortgage.</div>
+<div class="prompt">Walk me through how you calculate MAO.</div>
+<div class="expect">✔ MAO = ARV − repairs − end-buyer profit − assignment fee − closing costs; the 70% rule labeled as a convention; and it should refuse to produce an offer when inputs are missing.</div>
+</div></details>
 <ul class="tasks">
   <li><span class="tasktext">Told the agent to read every file starting with <code>_INDEX.md</code> then <code>00_operating-doctrine.md</code></span></li>
   <li><span class="tasktext">Added the permanent instruction to read the KB folder at the start of every session</span></li>
@@ -188,6 +296,20 @@ footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
 
 <div class="step"><div class="stepnum">Step 10</div><h3>Lock the operator's values</h3>
 <div class="stopbox"><span>⚠️</span><div>Don't skip — without these the agent (correctly) refuses to run offer math.</div></div>
+<details class="how"><summary>How to do this step</summary><div class="howbody">
+<p>The KB ships universal on purpose — these numbers are per-operator. Give them now with this prompt (fill in the brackets):</p>
+<div class="prompt">Lock these operator values into your knowledge permanently — create a file operator-values.md in the knowledge folder with:
+- Buy areas / markets: [cities, counties, zips]
+- Property types we buy / avoid: [list]
+- Target end-buyer profit margin: [X% or $X]
+- Target assignment fee: [$X]
+- Default MAO percentage: [e.g. 70%] and closing-cost assumption: [$X or X%]
+- Repair standards: light $[X]/sqft · medium $[X]/sqft · heavy $[X]/sqft
+- EMD policy: [amount, holder]
+- Follow-up cadence overrides: [if any]
+Confirm the file is saved and read it back to me.</div>
+<div class="expect">✔ Expect it to write the file and read back YOUR numbers.</div>
+</div></details>
 <ul class="tasks">
   <li><span class="tasktext">Provided buy areas / markets, property types (buy &amp; avoid)</span></li>
   <li><span class="tasktext">Provided profit margin, assignment fee, MAO % and closing-cost assumption</span></li>
@@ -196,6 +318,16 @@ footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
 </ul></div>
 
 <div class="step"><div class="stepnum">Step 11</div><h3>Run it — go live</h3>
+<details class="how"><summary>How to do this step</summary><div class="howbody">
+<p><strong>Acceptance test — paste a fake lead:</strong></p>
+<div class="prompt">New seller lead: John Smith, 123 Main St. Says the house needs work, tenant stopped paying, wants out fast. Qualify this lead per your SOP and tell me the next action.</div>
+<div class="expect">✔ Expect it to work the four pillars, tag the situation (tired-landlord, major-repairs…), tier it, name what's missing, set ONE next action — and NOT invent an offer.</div>
+<p><strong>Daily-driver prompts</strong> (these run the business day to day):</p>
+<div class="prompt">Give me a pipeline snapshot: count by stage, everything due or overdue, hottest deals, and any record missing a next action.</div>
+<div class="prompt">Draft a follow-up text for [seller] who said they'd think about it — per the seller-communication SOP.</div>
+<div class="prompt">Run the numbers: ARV [$X] from these comps [paste], repairs look [light/medium/heavy], [sqft]. Give me the offer package.</div>
+<p><strong>Optional — auto-start so it survives reboots:</strong> Windows — Admin PowerShell → <code>hermes gateway install</code>. Mac — <code>hermes gateway --help</code> → service option. Anytime: <code>hermes gateway status</code> / <code>hermes gateway restart</code>.</p>
+</div></details>
 <ul class="tasks">
   <li><span class="tasktext">Ran the fake-lead acceptance test — agent qualified per SOP, invented no numbers, set one next action</span></li>
   <li><span class="tasktext">Tried the daily-driver prompts (pipeline snapshot, follow-up draft, run-the-numbers)</span></li>
