@@ -1,0 +1,252 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setting Up Your AI Agent — Checklist</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep-black:#0A0A0A; --midnight:#0F172A; --electric:#3B82F6;
+  --light-blue:#60A5FA; --soft-gray:#E5E7EB; --dark-gray:#1F2937;
+  --muted:#94A3B8; --card:#0F172A; --line:rgba(59,130,246,.18); --green:#4ADE80;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--deep-black);
+  background-image:radial-gradient(1200px 500px at 50% -10%, rgba(59,130,246,.10), transparent 60%);
+  color:var(--soft-gray);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:15.5px; line-height:1.65; -webkit-font-smoothing:antialiased;
+}
+.page{max-width:820px;margin:0 auto;padding:0 28px 96px}
+
+header.doc{padding:52px 0 28px;position:relative}
+.brandline{display:flex;align-items:center;gap:14px;margin-bottom:30px}
+.xmark{width:42px;height:42px;border-radius:10px;
+  background:linear-gradient(135deg,#1E3A8A 0%,#3B82F6 60%,#60A5FA 100%);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;color:#fff;
+  box-shadow:0 0 22px rgba(59,130,246,.55), inset 0 1px 0 rgba(255,255,255,.25)}
+.brandname{font-weight:700;font-size:15px;letter-spacing:.14em;color:#fff}
+.brandname span{color:var(--light-blue)}
+.brandtag{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.back{font-size:12.5px;color:var(--muted);text-decoration:none;border-bottom:1px solid transparent}
+.back:hover{color:var(--light-blue);border-bottom-color:rgba(96,165,250,.4)}
+.docmeta{display:flex;align-items:center;gap:14px;margin:26px 0 14px}
+.docnum{font-weight:800;font-size:13px;letter-spacing:.2em;color:var(--electric);
+  padding:5px 12px;border:1px solid var(--electric);border-radius:6px;box-shadow:0 0 14px rgba(59,130,246,.35)}
+h1.doctitle{font-size:clamp(28px,5vw,40px);font-weight:800;letter-spacing:-.02em;color:#fff;line-height:1.12;margin-bottom:10px}
+.docsub{font-size:16.5px;color:var(--muted);font-weight:400;max-width:600px}
+
+/* progress */
+.progwrap{position:sticky;top:0;z-index:20;background:rgba(10,10,10,.92);backdrop-filter:blur(8px);
+  padding:16px 0 14px;margin:30px 0 8px;border-bottom:1px solid var(--line)}
+.progtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.progcount{font-weight:700;color:#fff;font-size:15px}
+.progcount b{color:var(--light-blue)}
+.resetbtn{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);background:rgba(148,163,184,.08);border:1px solid rgba(148,163,184,.22);
+  border-radius:7px;padding:6px 12px;cursor:pointer;transition:all .15s}
+.resetbtn:hover{color:#FCA5A5;border-color:rgba(248,113,113,.4)}
+.progbar{height:8px;border-radius:999px;background:rgba(148,163,184,.14);overflow:hidden}
+.progfill{height:100%;width:0;border-radius:999px;
+  background:linear-gradient(90deg,var(--electric),var(--light-blue));
+  box-shadow:0 0 14px rgba(59,130,246,.6);transition:width .35s ease}
+.donebanner{display:none;gap:12px;align-items:center;margin:18px 0 4px;padding:14px 18px;border-radius:12px;
+  background:linear-gradient(90deg,rgba(34,197,94,.14),rgba(34,197,94,.03));border:1px solid rgba(74,222,128,.4);color:#BBF7D0;font-weight:600}
+.donebanner.show{display:flex}
+
+/* step cards */
+.step{background:var(--midnight);border:1px solid rgba(148,163,184,.12);border-radius:16px;
+  padding:22px 24px 10px;margin:22px 0;position:relative;border-left:3px solid var(--electric)}
+.stepnum{position:absolute;top:-13px;left:20px;font-family:'JetBrains Mono',monospace;font-weight:600;
+  font-size:11px;letter-spacing:.16em;color:var(--light-blue);background:#0B1120;
+  border:1px solid var(--electric);border-radius:999px;padding:5px 14px;text-transform:uppercase;
+  box-shadow:0 0 14px rgba(59,130,246,.35)}
+.step h3{margin:6px 0 4px;font-size:17px;color:#fff;font-weight:700}
+.stepnote{font-size:13px;color:var(--muted);margin-bottom:12px}
+
+/* checklist items */
+ul.tasks{list-style:none;margin:0}
+ul.tasks li{display:flex;gap:12px;align-items:flex-start;padding:11px 4px;
+  border-bottom:1px solid rgba(148,163,184,.08);cursor:pointer;user-select:none;transition:opacity .2s}
+ul.tasks li:last-child{border-bottom:none}
+.cb{flex:none;width:20px;height:20px;margin-top:1px;border-radius:6px;border:2px solid var(--electric);
+  box-shadow:0 0 8px rgba(59,130,246,.30);display:flex;align-items:center;justify-content:center;
+  transition:all .15s;background:transparent}
+.cb svg{width:12px;height:12px;opacity:0;transform:scale(.5);transition:all .15s}
+.tasktext{flex:1;color:var(--soft-gray);font-size:14.5px}
+.tasktext code{font-family:'JetBrains Mono',monospace;font-size:.85em;color:var(--light-blue);
+  background:var(--dark-gray);padding:2px 6px;border-radius:5px;border:1px solid rgba(96,165,250,.2)}
+li.done .cb{background:var(--green);border-color:var(--green);box-shadow:0 0 10px rgba(74,222,128,.5)}
+li.done .cb svg{opacity:1;transform:scale(1)}
+li.done .tasktext{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(148,163,184,.5)}
+
+.stopbox{display:flex;gap:10px;background:linear-gradient(90deg,rgba(220,38,38,.12),rgba(220,38,38,.02));
+  border:1px solid rgba(248,113,113,.35);border-radius:10px;padding:11px 14px;margin:12px 0 14px;color:#FECACA;font-size:13px;font-weight:500}
+
+footer.doc{margin-top:70px;padding-top:24px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  font-size:12px;color:var(--muted);letter-spacing:.06em}
+footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
+@media (max-width:640px){.page{padding:0 18px 64px}}
+</style></head>
+<body><div class="page">
+<header class="doc">
+  <div class="brandline"><div class="xmark">X</div>
+    <div><div class="brandname">JARVIS <span>&times;</span> XCEREBRO AI</div>
+    <div class="brandtag">Your AI Employee. Runs Your Business 24/7.</div></div></div>
+  <a class="back" href="index.html">&larr; Back to the onboarding kit</a>
+  <div class="docmeta"><span class="docnum">CHECKLIST</span></div>
+  <h1 class="doctitle">Setting Up Your AI Agent</h1>
+  <p class="docsub">Tick each box as you go — from an empty machine to a live agent qualifying leads. Your progress is saved on this device automatically.</p>
+</header>
+
+<div class="progwrap">
+  <div class="progtop">
+    <div class="progcount"><b id="doneN">0</b> / <span id="totalN">0</span> steps complete</div>
+    <button class="resetbtn" id="resetBtn">Reset</button>
+  </div>
+  <div class="progbar"><div class="progfill" id="progfill"></div></div>
+  <div class="donebanner" id="doneBanner"><span>✅</span><div>All set — your AI agent is fully configured and live.</div></div>
+</div>
+
+<main id="list">
+
+<div class="step"><div class="stepnum">Step 1</div><h3>Prerequisites &amp; network check</h3>
+<p class="stepnote">Open Terminal (Mac) or PowerShell (Windows) first.</p>
+<ul class="tasks">
+  <li><span class="tasktext">Node v18+ installed (<code>node --version</code>) — if missing, install LTS from nodejs.org</span></li>
+  <li><span class="tasktext">Python 3.10+ installed (<code>python3 --version</code> / <code>python --version</code>) — on Windows tick <strong>"Add Python to PATH"</strong></span></li>
+  <li><span class="tasktext">Telegram reachable (<code>curl -I https://api.telegram.org</code>) — if it hangs, switch to a phone hotspot</span></li>
+  <li><span class="tasktext">Git available (Mac: accept the dev-tools popup; Windows: don't pre-install Git)</span></li>
+</ul></div>
+
+<div class="step"><div class="stepnum">Step 2</div><h3>Install Hermes</h3>
+<ul class="tasks">
+  <li><span class="tasktext">Ran the Hermes installer and let the "11 steps" finish untouched</span></li>
+  <li><span class="tasktext">Closed the shell and opened a <strong>fresh</strong> one</span></li>
+  <li><span class="tasktext"><code>hermes --version</code> shows a version banner</span></li>
+  <li><span class="tasktext"><code>hermes gateway</code> shows the "Gateway Starting…" box (a healthy start)</span></li>
+</ul></div>
+
+<div class="step"><div class="stepnum">Step 3</div><h3>Claude API key</h3>
+<p class="stepnote">In the browser — nothing installs here.</p>
+<ul class="tasks">
+  <li><span class="tasktext">Signed up at <strong>console.anthropic.com</strong> (separate from claude.ai chat)</span></li>
+  <li><span class="tasktext">Added billing / starter credits ($5–25)</span></li>
+  <li><span class="tasktext"><strong>Set the monthly spend limit</strong> (Settings → Limits) before creating a key</span></li>
+  <li><span class="tasktext">Created the key (<code>sk-ant-api03-…</code>) and saved it immediately — it's shown once</span></li>
+</ul></div>
+
+<div class="step"><div class="stepnum">Step 4</div><h3>Connect Claude in Hermes</h3>
+<ul class="tasks">
+  <li><span class="tasktext">Chose <strong>"I have an API key"</strong> and pasted it into the <strong>Anthropic</strong> row</span></li>
+  <li><span class="tasktext">Verified the <strong>OpenRouter row is empty</strong> and never touched OAuth / <code>claude setup-token</code></span></li>
+  <li><span class="tasktext">Pinned the model to <strong>Sonnet</strong> (Opus ≈ 5× cost)</span></li>
+  <li><span class="tasktext">Gateway reads <strong>ready</strong></span></li>
+</ul></div>
+
+<div class="step"><div class="stepnum">Step 5</div><h3>Create the Telegram bot</h3>
+<p class="stepnote">On your phone.</p>
+<ul class="tasks">
+  <li><span class="tasktext">Messaged the verified <strong>@BotFather</strong> and sent <code>/newbot</code></span></li>
+  <li><span class="tasktext">Set a display name (business brand) and a username ending in <code>bot</code></span></li>
+  <li><span class="tasktext">Saved the bot <strong>token</strong> (kept out of screenshots / group chats)</span></li>
+  <li><span class="tasktext">Tapped <strong>START</strong> on the new bot</span></li>
+  <li><span class="tasktext">Got your numeric user ID from <strong>@userinfobot</strong></span></li>
+</ul></div>
+
+<div class="step"><div class="stepnum">Step 6</div><h3>Wire Telegram in Hermes</h3>
+<ul class="tasks">
+  <li><span class="tasktext">Pasted the bot token (Messaging → Telegram)</span></li>
+  <li><span class="tasktext">Added your numeric ID to <strong>Allowed Telegram user IDs</strong></span></li>
+  <li><span class="tasktext"><strong>Allow all users = false/empty</strong></span></li>
+  <li><span class="tasktext">Set <strong>Home channel ID</strong> = your user ID, then Saved</span></li>
+</ul></div>
+
+<div class="step"><div class="stepnum">Step 7</div><h3>First contact</h3>
+<ul class="tasks">
+  <li><span class="tasktext">Messaged the bot "Confirm you're connected" and got a reply</span></li>
+  <li><span class="tasktext">Asked "What AI model are you using?" — it answered <strong>Sonnet</strong></span></li>
+  <li><span class="tasktext">Confirmed today's traffic appears on console.anthropic.com → <strong>Usage</strong></span></li>
+</ul></div>
+
+<div class="step"><div class="stepnum">Step 8</div><h3>Deploy the knowledge base files</h3>
+<ul class="tasks">
+  <li><span class="tasktext">Created the folder <code>Documents/JARVIS-Knowledge</code></span></li>
+  <li><span class="tasktext">Moved in the 10 wholesale KB files (_INDEX + 00–08)</span></li>
+  <li><span class="tasktext">Confirmed the folder contents (10 files, names match)</span></li>
+</ul></div>
+
+<div class="step"><div class="stepnum">Step 9</div><h3>Load &amp; persist the KB</h3>
+<ul class="tasks">
+  <li><span class="tasktext">Told the agent to read every file starting with <code>_INDEX.md</code> then <code>00_operating-doctrine.md</code></span></li>
+  <li><span class="tasktext">Added the permanent instruction to read the KB folder at the start of every session</span></li>
+  <li><span class="tasktext">Verified: doctrine 3-bullet summary is correct</span></li>
+  <li><span class="tasktext">Verified: names the four pillars (Condition · Motivation · Timeline · Price/Mortgage)</span></li>
+  <li><span class="tasktext">Verified: walks through MAO correctly and refuses to offer with missing inputs</span></li>
+</ul></div>
+
+<div class="step"><div class="stepnum">Step 10</div><h3>Lock the operator's values</h3>
+<div class="stopbox"><span>⚠️</span><div>Don't skip — without these the agent (correctly) refuses to run offer math.</div></div>
+<ul class="tasks">
+  <li><span class="tasktext">Provided buy areas / markets, property types (buy &amp; avoid)</span></li>
+  <li><span class="tasktext">Provided profit margin, assignment fee, MAO % and closing-cost assumption</span></li>
+  <li><span class="tasktext">Provided repair standards, EMD policy, follow-up cadence overrides</span></li>
+  <li><span class="tasktext">Agent saved <code>operator-values.md</code> and read your numbers back</span></li>
+</ul></div>
+
+<div class="step"><div class="stepnum">Step 11</div><h3>Run it — go live</h3>
+<ul class="tasks">
+  <li><span class="tasktext">Ran the fake-lead acceptance test — agent qualified per SOP, invented no numbers, set one next action</span></li>
+  <li><span class="tasktext">Tried the daily-driver prompts (pipeline snapshot, follow-up draft, run-the-numbers)</span></li>
+  <li><span class="tasktext"><em>Optional:</em> set gateway auto-start so it survives reboots (<code>hermes gateway install</code>)</span></li>
+  <li><span class="tasktext">Confirmed the bot answers after a restart with no manual launch</span></li>
+</ul></div>
+
+</main>
+
+<footer class="doc">
+  <span><span class="glowdot">●</span>&nbsp; JARVIS Agent Install System &nbsp;·&nbsp; Just Jarvis LLC</span>
+  <span>Setup Checklist &nbsp;·&nbsp; v1.2</span>
+</footer>
+</div>
+
+<script>
+(function(){
+  var KEY = 'jarvis-setup-checklist-v1';
+  var items = Array.prototype.slice.call(document.querySelectorAll('ul.tasks li'));
+  var check = '<span class="cb"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0A0A0A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
+  items.forEach(function(li,i){ li.insertAdjacentHTML('afterbegin', check); li.dataset.idx = i; });
+
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){}
+  items.forEach(function(li,i){ if(saved[i]) li.classList.add('done'); });
+
+  var doneN = document.getElementById('doneN'),
+      progfill = document.getElementById('progfill'),
+      banner = document.getElementById('doneBanner');
+  document.getElementById('totalN').textContent = items.length;
+
+  function persist(){
+    var state = {};
+    items.forEach(function(li,i){ if(li.classList.contains('done')) state[i] = 1; });
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){}
+  }
+  function refresh(){
+    var n = items.filter(function(li){ return li.classList.contains('done'); }).length;
+    doneN.textContent = n;
+    progfill.style.width = (items.length ? (n/items.length*100) : 0) + '%';
+    banner.classList.toggle('show', n === items.length && items.length > 0);
+  }
+  items.forEach(function(li){
+    li.addEventListener('click', function(){ li.classList.toggle('done'); persist(); refresh(); });
+  });
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    if(!confirm('Clear all checklist progress on this device?')) return;
+    items.forEach(function(li){ li.classList.remove('done'); });
+    persist(); refresh();
+  });
+  refresh();
+})();
+</script>
+</body></html>
