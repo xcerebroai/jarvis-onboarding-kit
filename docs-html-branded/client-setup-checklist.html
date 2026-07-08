@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your JARVIS Agent — Complete Setup Checklist</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep-black:#0A0A0A; --midnight:#0F172A; --electric:#3B82F6;
+  --light-blue:#60A5FA; --soft-gray:#E5E7EB; --dark-gray:#1F2937;
+  --muted:#94A3B8; --card:#0F172A; --line:rgba(59,130,246,.18); --green:#4ADE80;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--deep-black);
+  background-image:radial-gradient(1200px 500px at 50% -10%, rgba(59,130,246,.10), transparent 60%);
+  color:var(--soft-gray);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:15.5px; line-height:1.65; -webkit-font-smoothing:antialiased;
+}
+.page{max-width:780px;margin:0 auto;padding:0 28px 96px}
+
+header.doc{padding:52px 0 26px;position:relative}
+.brandline{display:flex;align-items:center;gap:14px;margin-bottom:30px}
+.xmark{width:42px;height:42px;border-radius:10px;
+  background:linear-gradient(135deg,#1E3A8A 0%,#3B82F6 60%,#60A5FA 100%);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;color:#fff;
+  box-shadow:0 0 22px rgba(59,130,246,.55), inset 0 1px 0 rgba(255,255,255,.25)}
+.brandname{font-weight:700;font-size:15px;letter-spacing:.14em;color:#fff}
+.brandname span{color:var(--light-blue)}
+.brandtag{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.docmeta{display:flex;align-items:center;gap:12px;margin:24px 0 14px}
+.badge{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:6px 13px;border-radius:999px;
+  color:var(--light-blue);background:rgba(59,130,246,.12);border:1px solid rgba(96,165,250,.45)}
+h1.doctitle{font-size:clamp(28px,5vw,40px);font-weight:800;letter-spacing:-.02em;color:#fff;line-height:1.12;margin-bottom:12px}
+.docsub{font-size:16.5px;color:var(--muted);font-weight:400;max-width:600px}
+.docsub strong{color:var(--soft-gray)}
+.intro{margin:22px 0 6px;padding:16px 20px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(34,197,94,.12),rgba(34,197,94,.03));border:1px solid rgba(74,222,128,.32);font-size:14.5px}
+.intro b{color:#fff}
+
+.progwrap{position:sticky;top:0;z-index:20;background:rgba(10,10,10,.92);backdrop-filter:blur(8px);
+  padding:16px 0 14px;margin:26px 0 8px;border-bottom:1px solid var(--line)}
+.progtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.progcount{font-weight:700;color:#fff;font-size:15px}
+.progcount b{color:var(--light-blue)}
+.resetbtn{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);background:rgba(148,163,184,.08);border:1px solid rgba(148,163,184,.22);
+  border-radius:7px;padding:6px 12px;cursor:pointer;transition:all .15s}
+.resetbtn:hover{color:#FCA5A5;border-color:rgba(248,113,113,.4)}
+.progbar{height:8px;border-radius:999px;background:rgba(148,163,184,.14);overflow:hidden}
+.progfill{height:100%;width:0;border-radius:999px;
+  background:linear-gradient(90deg,var(--electric),var(--light-blue));
+  box-shadow:0 0 14px rgba(59,130,246,.6);transition:width .35s ease}
+.donebanner{display:none;gap:12px;align-items:center;margin:18px 0 4px;padding:14px 18px;border-radius:12px;
+  background:linear-gradient(90deg,rgba(34,197,94,.14),rgba(34,197,94,.03));border:1px solid rgba(74,222,128,.4);color:#BBF7D0;font-weight:600}
+.donebanner.show{display:flex}
+
+.step{background:var(--midnight);border:1px solid rgba(148,163,184,.12);border-radius:16px;
+  padding:18px 22px 8px;margin:16px 0;position:relative;border-left:3px solid var(--electric)}
+.step h3{margin:0;font-size:16.5px;color:#fff;font-weight:700}
+
+ul.tasks{list-style:none;margin:0}
+ul.tasks li{display:flex;gap:12px;align-items:flex-start;padding:12px 2px;cursor:pointer;user-select:none;transition:opacity .2s}
+.cb{flex:none;width:22px;height:22px;margin-top:1px;border-radius:6px;border:2px solid var(--electric);
+  box-shadow:0 0 8px rgba(59,130,246,.30);display:flex;align-items:center;justify-content:center;
+  transition:all .15s;background:transparent}
+.cb svg{width:13px;height:13px;opacity:0;transform:scale(.5);transition:all .15s}
+.tasktext{flex:1;color:var(--soft-gray);font-size:15px}
+.tasktext small{display:block;color:var(--muted);font-size:12.5px;margin-top:4px;line-height:1.55}
+li.done .cb{background:var(--green);border-color:var(--green);box-shadow:0 0 10px rgba(74,222,128,.5)}
+li.done .cb svg{opacity:1;transform:scale(1)}
+li.done .tasktext{color:var(--muted)}
+li.done .tasktext > strong:first-of-type{text-decoration:line-through;text-decoration-color:rgba(148,163,184,.5)}
+
+.verify{margin:26px 0 10px;padding:2px 0}
+.verify h2{font-size:19px;color:#fff;font-weight:700;margin:0 0 4px;padding-left:14px;border-left:3px solid var(--electric)}
+.verifysub{color:var(--muted);font-size:13.5px;margin:6px 0 14px;padding-left:14px}
+.prompt{font-family:'JetBrains Mono',monospace;font-size:13px;background:#0B1120;border:1px solid rgba(96,165,250,.35);
+  border-radius:9px;padding:12px 15px;margin:9px 0;color:#DBEAFE;white-space:pre-wrap;line-height:1.55}
+.prompt::before{content:"MESSAGE YOUR AGENT ▸  ";color:var(--electric);font-weight:700;font-size:9.5px;letter-spacing:.12em}
+.expect{font-size:12.5px;color:var(--muted);margin:2px 0 12px;padding-left:12px;border-left:2px solid rgba(148,163,184,.25)}
+
+footer.doc{margin-top:52px;padding-top:24px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  font-size:12px;color:var(--muted);letter-spacing:.06em}
+footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
+@media (max-width:640px){.page{padding:0 18px 64px}}
+</style></head>
+<body><div class="page">
+<header class="doc">
+  <div class="brandline"><div class="xmark">X</div>
+    <div><div class="brandname">JARVIS <span>&times;</span> XCEREBRO AI</div>
+    <div class="brandtag">Your AI Employee. Runs Your Business 24/7.</div></div></div>
+  <div class="docmeta"><span class="badge">Your Agent — Setup Summary</span></div>
+  <h1 class="doctitle">Your JARVIS Agent — Complete Setup</h1>
+  <p class="docsub">Everything that's now configured on your AI agent. Tick through to confirm each piece — and use the quick checks to see it working for yourself.</p>
+  <div class="intro"><b>Your agent is live.</b> This is the full picture of what was set up on your install call. Your progress on this page is saved on this device automatically.</div>
+</header>
+
+<div class="progwrap">
+  <div class="progtop">
+    <div class="progcount"><b id="doneN">0</b> / <span id="totalN">0</span> confirmed</div>
+    <button class="resetbtn" id="resetBtn">Reset</button>
+  </div>
+  <div class="progbar"><div class="progfill" id="progfill"></div></div>
+  <div class="donebanner" id="doneBanner"><span>✅</span><div>Every part of your agent is confirmed working. You're fully set up!</div></div>
+</div>
+
+<main id="list">
+
+<div class="step"><h3>🖥️ Foundation</h3>
+<ul class="tasks">
+  <li><span class="tasktext"><strong>Your computer &amp; apps are ready</strong><small>The required software is installed, and Telegram is set up on both your phone and computer.</small></span></li>
+  <li><span class="tasktext"><strong>Your agent's engine is installed &amp; running</strong><small>The gateway that keeps your agent online is set up on your machine.</small></span></li>
+</ul></div>
+
+<div class="step"><h3>🧠 AI Brain</h3>
+<ul class="tasks">
+  <li><span class="tasktext"><strong>Your AI account is connected</strong><small>Set up with a monthly spend limit that you control, so costs never surprise you.</small></span></li>
+  <li><span class="tasktext"><strong>Your agent runs on the right model</strong><small>Tuned for the best balance of quality and cost.</small></span></li>
+</ul></div>
+
+<div class="step"><h3>💬 Your Private Line</h3>
+<ul class="tasks">
+  <li><span class="tasktext"><strong>Your private Telegram bot is created</strong><small>Under your business name — this is where you'll talk to your agent every day.</small></span></li>
+  <li><span class="tasktext"><strong>It's locked to you only</strong><small>No one else can message or use your agent.</small></span></li>
+  <li><span class="tasktext"><strong>Your agent replies to you in Telegram</strong><small>Tested live on the call — it responds when you message it.</small></span></li>
+</ul></div>
+
+<div class="step"><h3>📚 Trained on Your Business</h3>
+<ul class="tasks">
+  <li><span class="tasktext"><strong>Your wholesale playbook is loaded</strong><small>Your full knowledge base — doctrine, lead qualification, seller communication, offer math, pipeline, and disposition.</small></span></li>
+  <li><span class="tasktext"><strong>Your agent has learned &amp; saved it permanently</strong><small>It reads your playbook at the start of every session, on every channel.</small></span></li>
+  <li><span class="tasktext"><strong>Your specific numbers are locked in</strong><small>Your markets, target margins, assignment fee, MAO %, and repair standards — so its math matches your business.</small></span></li>
+</ul></div>
+
+<div class="step"><h3>🚀 Live &amp; Tested</h3>
+<ul class="tasks">
+  <li><span class="tasktext"><strong>Your agent is qualifying leads</strong><small>Tested on the call with a sample lead — it works your process and flags the next action.</small></span></li>
+  <li><span class="tasktext"><strong>You've driven it yourself</strong><small>You ran it during the call and saw it in action.</small></span></li>
+</ul></div>
+
+<div class="verify">
+<h2>See it working — quick checks</h2>
+<p class="verifysub">Message these to your agent in Telegram anytime to confirm each piece is live.</p>
+
+<div class="prompt">Confirm you're connected.</div>
+<div class="expect">✔ It replies in Telegram — your private line is working.</div>
+
+<div class="prompt">What AI model are you using?</div>
+<div class="expect">✔ It names the model it's running on — your AI brain is connected.</div>
+
+<div class="prompt">What are the four pillars of lead qualification?</div>
+<div class="expect">✔ Condition · Motivation · Timeline · Price/Mortgage — your playbook is loaded.</div>
+
+<div class="prompt">Read back my locked-in operator values.</div>
+<div class="expect">✔ It lists your markets, margins, fees, and repair standards — your numbers are saved.</div>
+
+<div class="prompt">New seller lead: needs work, tenant stopped paying, wants out fast. Qualify it and tell me the next action.</div>
+<div class="expect">✔ It works the four pillars, flags what's missing, and sets one next action — your agent is fully live.</div>
+</div>
+
+</main>
+
+<footer class="doc">
+  <span><span class="glowdot">●</span>&nbsp; JARVIS Agent Onboarding &nbsp;·&nbsp; Just Jarvis LLC</span>
+  <span>Complete Setup Checklist</span>
+</footer>
+</div>
+
+<script>
+(function(){
+  var KEY = 'jarvis-client-setup-checklist-v1';
+  var items = Array.prototype.slice.call(document.querySelectorAll('ul.tasks li'));
+  var check = '<span class="cb"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0A0A0A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
+  items.forEach(function(li,i){ li.insertAdjacentHTML('afterbegin', check); li.dataset.idx = i; });
+
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){}
+  items.forEach(function(li,i){ if(saved[i]) li.classList.add('done'); });
+
+  var doneN = document.getElementById('doneN'),
+      progfill = document.getElementById('progfill'),
+      banner = document.getElementById('doneBanner');
+  document.getElementById('totalN').textContent = items.length;
+
+  function persist(){
+    var state = {};
+    items.forEach(function(li,i){ if(li.classList.contains('done')) state[i] = 1; });
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){}
+  }
+  function refresh(){
+    var n = items.filter(function(li){ return li.classList.contains('done'); }).length;
+    doneN.textContent = n;
+    progfill.style.width = (items.length ? (n/items.length*100) : 0) + '%';
+    banner.classList.toggle('show', n === items.length && items.length > 0);
+  }
+  items.forEach(function(li){
+    li.addEventListener('click', function(){ li.classList.toggle('done'); persist(); refresh(); });
+  });
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    if(!confirm('Clear all progress on this device?')) return;
+    items.forEach(function(li){ li.classList.remove('done'); });
+    persist(); refresh();
+  });
+  refresh();
+})();
+</script>
+</body></html>
