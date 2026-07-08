@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Ready for Your JARVIS Install Call — Checklist</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep-black:#0A0A0A; --midnight:#0F172A; --electric:#3B82F6;
+  --light-blue:#60A5FA; --soft-gray:#E5E7EB; --dark-gray:#1F2937;
+  --muted:#94A3B8; --card:#0F172A; --line:rgba(59,130,246,.18); --green:#4ADE80;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--deep-black);
+  background-image:radial-gradient(1200px 500px at 50% -10%, rgba(59,130,246,.10), transparent 60%);
+  color:var(--soft-gray);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:15.5px; line-height:1.65; -webkit-font-smoothing:antialiased;
+}
+.page{max-width:780px;margin:0 auto;padding:0 28px 96px}
+
+header.doc{padding:52px 0 26px;position:relative}
+.brandline{display:flex;align-items:center;gap:14px;margin-bottom:30px}
+.xmark{width:42px;height:42px;border-radius:10px;
+  background:linear-gradient(135deg,#1E3A8A 0%,#3B82F6 60%,#60A5FA 100%);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;color:#fff;
+  box-shadow:0 0 22px rgba(59,130,246,.55), inset 0 1px 0 rgba(255,255,255,.25)}
+.brandname{font-weight:700;font-size:15px;letter-spacing:.14em;color:#fff}
+.brandname span{color:var(--light-blue)}
+.brandtag{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.docmeta{display:flex;align-items:center;gap:12px;margin:24px 0 14px}
+.badge{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:6px 13px;border-radius:999px;
+  color:var(--light-blue);background:rgba(59,130,246,.12);border:1px solid rgba(96,165,250,.45)}
+h1.doctitle{font-size:clamp(28px,5vw,40px);font-weight:800;letter-spacing:-.02em;color:#fff;line-height:1.12;margin-bottom:12px}
+.docsub{font-size:16.5px;color:var(--muted);font-weight:400;max-width:600px}
+.docsub strong{color:var(--soft-gray)}
+
+.intro{margin:22px 0 6px;padding:16px 20px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(59,130,246,.03));border:1px solid var(--line);font-size:14.5px}
+.intro b{color:#fff}
+
+/* progress */
+.progwrap{position:sticky;top:0;z-index:20;background:rgba(10,10,10,.92);backdrop-filter:blur(8px);
+  padding:16px 0 14px;margin:26px 0 8px;border-bottom:1px solid var(--line)}
+.progtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.progcount{font-weight:700;color:#fff;font-size:15px}
+.progcount b{color:var(--light-blue)}
+.resetbtn{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);background:rgba(148,163,184,.08);border:1px solid rgba(148,163,184,.22);
+  border-radius:7px;padding:6px 12px;cursor:pointer;transition:all .15s}
+.resetbtn:hover{color:#FCA5A5;border-color:rgba(248,113,113,.4)}
+.progbar{height:8px;border-radius:999px;background:rgba(148,163,184,.14);overflow:hidden}
+.progfill{height:100%;width:0;border-radius:999px;
+  background:linear-gradient(90deg,var(--electric),var(--light-blue));
+  box-shadow:0 0 14px rgba(59,130,246,.6);transition:width .35s ease}
+.donebanner{display:none;gap:12px;align-items:center;margin:18px 0 4px;padding:14px 18px;border-radius:12px;
+  background:linear-gradient(90deg,rgba(34,197,94,.14),rgba(34,197,94,.03));border:1px solid rgba(74,222,128,.4);color:#BBF7D0;font-weight:600}
+.donebanner.show{display:flex}
+
+.step{background:var(--midnight);border:1px solid rgba(148,163,184,.12);border-radius:16px;
+  padding:22px 24px 12px;margin:22px 0;position:relative;border-left:3px solid var(--electric)}
+.step h3{margin:0 0 4px;font-size:18px;color:#fff;font-weight:700}
+.stepnote{font-size:13px;color:var(--muted);margin-bottom:12px}
+
+ul.tasks{list-style:none;margin:0}
+ul.tasks li{display:flex;gap:12px;align-items:flex-start;padding:11px 4px;
+  border-bottom:1px solid rgba(148,163,184,.08);cursor:pointer;user-select:none;transition:opacity .2s}
+ul.tasks li:last-child{border-bottom:none}
+.cb{flex:none;width:20px;height:20px;margin-top:1px;border-radius:6px;border:2px solid var(--electric);
+  box-shadow:0 0 8px rgba(59,130,246,.30);display:flex;align-items:center;justify-content:center;
+  transition:all .15s;background:transparent}
+.cb svg{width:12px;height:12px;opacity:0;transform:scale(.5);transition:all .15s}
+.tasktext{flex:1;color:var(--soft-gray);font-size:14.5px}
+.tasktext small{display:block;color:var(--muted);font-size:12.5px;margin-top:3px}
+.tasktext code{font-family:'JetBrains Mono',monospace;font-size:.85em;color:var(--light-blue);
+  background:var(--dark-gray);padding:2px 6px;border-radius:5px;border:1px solid rgba(96,165,250,.2)}
+li.done .cb{background:var(--green);border-color:var(--green);box-shadow:0 0 10px rgba(74,222,128,.5)}
+li.done .cb svg{opacity:1;transform:scale(1)}
+li.done .tasktext{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(148,163,184,.5)}
+
+.callout{display:flex;gap:12px;padding:16px 18px;border-radius:12px;margin:24px 0 6px;
+  background:linear-gradient(135deg,rgba(59,130,246,.10),rgba(59,130,246,.03));border:1px solid var(--line)}
+.callout .ic{flex:none;font-size:18px;line-height:1.5}
+.callout h4{color:#fff;font-size:14px;margin:0 0 6px;letter-spacing:.02em}
+.callout ul{margin:0 0 0 18px;font-size:13.5px;color:var(--soft-gray)}
+.callout li{margin-bottom:5px}
+.callout.warn{background:linear-gradient(135deg,rgba(220,38,38,.10),rgba(220,38,38,.02));border-color:rgba(248,113,113,.35)}
+
+.outro{margin:30px 0 0;padding:18px 22px;border-radius:14px;background:var(--midnight);
+  border:1px solid rgba(74,222,128,.3);font-size:14.5px}
+.outro b{color:#fff}
+
+footer.doc{margin-top:56px;padding-top:24px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  font-size:12px;color:var(--muted);letter-spacing:.06em}
+footer .glowdot{color:var(--electric);text-shadow:0 0 10px rgba(59,130,246,.8)}
+@media (max-width:640px){.page{padding:0 18px 64px}}
+</style></head>
+<body><div class="page">
+<header class="doc">
+  <div class="brandline"><div class="xmark">X</div>
+    <div><div class="brandname">JARVIS <span>&times;</span> XCEREBRO AI</div>
+    <div class="brandtag">Your AI Employee. Runs Your Business 24/7.</div></div></div>
+  <div class="docmeta"><span class="badge">For You — Before Your Call</span></div>
+  <h1 class="doctitle">Get Ready for Your Install Call</h1>
+  <p class="docsub">A few quick things to have ready so we can spend your call <strong>building your agent</strong> — not resetting passwords.</p>
+  <div class="intro"><b>Please complete this before your install call.</b> Every unchecked box tends to cost 10–15 minutes of call time. Tick each item as you go — your progress is saved on this device automatically.</div>
+</header>
+
+<div class="progwrap">
+  <div class="progtop">
+    <div class="progcount"><b id="doneN">0</b> / <span id="totalN">0</span> ready</div>
+    <button class="resetbtn" id="resetBtn">Reset</button>
+  </div>
+  <div class="progbar"><div class="progfill" id="progfill"></div></div>
+  <div class="donebanner" id="doneBanner"><span>✅</span><div>You're all set for your install call. See you there!</div></div>
+</div>
+
+<main id="list">
+
+<div class="step"><h3>💻 Devices &amp; Apps</h3>
+<ul class="tasks">
+  <li><span class="tasktext">I have a computer I can install software on (Windows or Mac), and I'll be sitting at it during the call</span></li>
+  <li><span class="tasktext">Telegram is installed on my <strong>phone</strong> and I'm logged in</span></li>
+  <li><span class="tasktext">Telegram is installed on my <strong>computer</strong>, logged in with the same account</span></li>
+  <li><span class="tasktext">I can join a <strong>Zoom</strong> call with screen share from that computer</span></li>
+</ul></div>
+
+<div class="step"><h3>🔑 Accounts &amp; Logins</h3>
+<p class="stepnote">Test each login <strong>today</strong> — not on call day.</p>
+<ul class="tasks">
+  <li><span class="tasktext">I can log into my <strong>JARVIS account</strong><small>Credentials were sent in your welcome email.</small></span></li>
+  <li><span class="tasktext">I can log into my <strong>Jarvis CRM</strong> account</span></li>
+  <li><span class="tasktext">I can log into my <strong>AI account</strong><small>ChatGPT users: confirm you can sign into chat.openai.com. Claude users: just have your payment method ready — we set up your usage-based account together on the call (about 5 min, and you control the spend limit).</small></span></li>
+  <li><span class="tasktext">I know my <strong>email password</strong><small>Some steps send verification codes to your inbox.</small></span></li>
+</ul></div>
+
+<div class="step"><h3>📋 Business Materials</h3>
+<p class="stepnote">Have these ready to copy/paste or upload — or just tell us on the call.</p>
+<ul class="tasks">
+  <li><span class="tasktext">My <strong>buy box</strong> in writing (cities, zips, property types, minimum spread)</span></li>
+  <li><span class="tasktext">My <strong>seller scripts</strong> (cold call, inbound, follow-up)</span></li>
+  <li><span class="tasktext">My <strong>follow-up text messages</strong></span></li>
+  <li><span class="tasktext">My <strong>offer formula</strong></span></li>
+  <li><span class="tasktext">A list of <strong>automations currently running in my CRM</strong> (or tell us on the call)</span></li>
+  <li><span class="tasktext">My <strong>do-not-say list</strong> — anything the agent should never promise or claim</span></li>
+</ul></div>
+
+<div class="step"><h3>👥 Team</h3>
+<ul class="tasks">
+  <li><span class="tasktext">If a VA or team member will use the agent, they're invited to the call<small>Optional, but recommended.</small></span></li>
+</ul></div>
+
+<div class="callout warn"><div class="ic">🚫</div><div>
+  <h4>What NOT to do before the call</h4>
+  <ul>
+    <li><strong>Don't create any bots, keys, or tokens ahead of time</strong> — we do that together on the call so nothing gets lost.</li>
+    <li><strong>Don't share passwords with us</strong> by text or email — you'll type your own logins during the call.</li>
+  </ul>
+</div></div>
+
+<div class="outro"><b>What happens on the call:</b> 60–90 minutes. By the end, your JARVIS Agent will be live in your Telegram, trained on your business, connected to your CRM, and tested with you driving.</div>
+
+</main>
+
+<footer class="doc">
+  <span><span class="glowdot">●</span>&nbsp; JARVIS Agent Onboarding &nbsp;·&nbsp; Just Jarvis LLC</span>
+  <span>Client Pre-Install Checklist</span>
+</footer>
+</div>
+
+<script>
+(function(){
+  var KEY = 'jarvis-client-checklist-v1';
+  var items = Array.prototype.slice.call(document.querySelectorAll('ul.tasks li'));
+  var check = '<span class="cb"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#0A0A0A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
+  items.forEach(function(li,i){ li.insertAdjacentHTML('afterbegin', check); li.dataset.idx = i; });
+
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){}
+  items.forEach(function(li,i){ if(saved[i]) li.classList.add('done'); });
+
+  var doneN = document.getElementById('doneN'),
+      progfill = document.getElementById('progfill'),
+      banner = document.getElementById('doneBanner');
+  document.getElementById('totalN').textContent = items.length;
+
+  function persist(){
+    var state = {};
+    items.forEach(function(li,i){ if(li.classList.contains('done')) state[i] = 1; });
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){}
+  }
+  function refresh(){
+    var n = items.filter(function(li){ return li.classList.contains('done'); }).length;
+    doneN.textContent = n;
+    progfill.style.width = (items.length ? (n/items.length*100) : 0) + '%';
+    banner.classList.toggle('show', n === items.length && items.length > 0);
+  }
+  items.forEach(function(li){
+    li.addEventListener('click', function(){ li.classList.toggle('done'); persist(); refresh(); });
+  });
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    if(!confirm('Clear all progress on this device?')) return;
+    items.forEach(function(li){ li.classList.remove('done'); });
+    persist(); refresh();
+  });
+  refresh();
+})();
+</script>
+</body></html>
