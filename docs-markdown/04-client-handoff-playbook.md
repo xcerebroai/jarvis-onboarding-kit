@@ -86,7 +86,7 @@ That's by design. You're the closer. JARVIS is your operations team.
 ## If Something Breaks
 
 1. Close and reopen the JARVIS Agent app on your computer
-2. Send a test message: "Are you connected?"
+2. Send a message: "Are you connected?"
 3. Still nothing? Message our team — we monitor installs and we'll get you back online
 
 ## Your First Week

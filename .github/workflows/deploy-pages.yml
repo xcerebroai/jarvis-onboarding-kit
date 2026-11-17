@@ -25,10 +25,16 @@ jobs:
         uses: actions/checkout@v4
       - name: Configure Pages
         uses: actions/configure-pages@v5
-      - name: Upload branded docs as Pages artifact
+      - name: Prepare client resources
+        run: |
+          mkdir -p _site
+          for page in index.html 01-client-intake-form.html 02-pre-install-access-checklist.html 04-client-handoff-playbook.html client-checklist.html client-setup-checklist.html setup-checklist.html; do
+            cp "docs-html-branded/$page" "_site/$page"
+          done
+      - name: Upload client resources as Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs-html-branded
+          path: _site
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

@@ -11,7 +11,7 @@
 - [ ] Telegram is installed on my **computer** and I'm logged in with the same account
 - [ ] I can join a Zoom call with screen share from that computer
 
-## Accounts & Logins (test each login TODAY, not on call day)
+## Accounts & Logins (check access before your call)
 
 - [ ] I can log into my **JARVIS account** (we sent your credentials in your welcome email)
 - [ ] I can log into my **Jarvis CRM** account
@@ -40,4 +40,4 @@
 
 ---
 
-**Call length:** 60–90 minutes. By the end, your JARVIS Agent will be live in your Telegram, trained on your business, connected to your CRM, and tested with you driving.
+**Call length:** 60–90 minutes. By the end, your JARVIS Agent will be live in your Telegram, trained on your business, connected to your CRM, with you in control.

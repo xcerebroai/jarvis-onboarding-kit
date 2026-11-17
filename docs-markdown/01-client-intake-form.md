@@ -104,4 +104,4 @@ The more detail you give us here, the smarter your agent will be on day one. Sho
 
 ---
 
-**What happens next:** Our team reviews your intake within 24 hours, then sends you a booking link plus a short access checklist so your install call runs smooth. On the call we install everything, train your agent on YOUR business, connect it to your Jarvis CRM, and test it live with you.
+**What happens next:** Our team reviews your intake within 24 hours, then sends you a booking link plus a short access checklist so your install call runs smooth. On the call we install everything, train your agent on YOUR business, connect it to your Jarvis CRM, and walk you through using it.

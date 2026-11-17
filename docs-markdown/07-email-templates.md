@@ -38,7 +38,7 @@ Reviewed your intake — solid. {one_personalized_line_about_their_business}.
 
 👉 **[Book Your Install Call]({booking_link})**
 
-**Step 3: knock out the attached Access Checklist before the call.** It's mostly "make sure you can log into things." Every login you test ahead of time is 10 more minutes we spend making your agent smarter instead of resetting passwords.
+**Step 3: knock out the attached Access Checklist before the call.** It's mostly "make sure you can log into things." Every login you check ahead of time is 10 more minutes we spend making your agent smarter instead of resetting passwords.
 
 Attached: JARVIS Pre-Install Access Checklist
 
@@ -56,10 +56,10 @@ See you on the call,
 Your install call is {day} at {time}. Quick pre-flight:
 
 1. ✅ Telegram installed on your **phone AND computer**, logged into both
-2. ✅ You can log into your Jarvis CRM and your AI account (test it today, not on the call)
+2. ✅ You can log into your Jarvis CRM and your AI account (check access before the call)
 3. ✅ Your buy box, scripts, and follow-up texts ready to paste
 
-By the end of the call, your JARVIS Agent will be live in your Telegram, trained on your business, connected to your CRM — and you'll test it yourself before we hang up.
+By the end of the call, your JARVIS Agent will be live in your Telegram, trained on your business, connected to your CRM — and you'll use it yourself before we finish.
 
 {installer_name}
 
